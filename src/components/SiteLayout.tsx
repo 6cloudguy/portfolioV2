@@ -21,7 +21,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
 
   return (
-    <div className="min-h-screen bg-background text-on-background font-body-md">
+    <div className="min-h-screen text-on-background font-body-md bg-transparent">
       <MatrixShader />
       <div className="scanline-overlay" />
 

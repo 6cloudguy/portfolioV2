@@ -25,29 +25,69 @@ export function MatrixShader() {
     const vs = `attribute vec2 a_position;
 varying vec2 v_texCoord;
 void main(){ v_texCoord = a_position * 0.5 + 0.5; gl_Position = vec4(a_position,0.0,1.0); }`;
+    
     const fs = `precision highp float;
 varying vec2 v_texCoord;
 uniform float u_time;
-float random(vec2 st){ return fract(sin(dot(st.xy,vec2(12.9898,78.233)))*43758.5453123); }
-void main(){
+
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+}
+
+float getGlyph(vec2 uv, float cellRand, float charTime) {
+  vec2 localUV = fract(uv);
+  vec2 pixel = floor(localUV * vec2(3.0, 5.0));
+  float shapeRand = hash(floor(uv) + vec2(charTime, charTime * 1.3));
+  float pixelRand = hash(pixel + vec2(shapeRand, -shapeRand));
+  if (localUV.x < 0.15 || localUV.x > 0.85 || localUV.y < 0.1 || localUV.y > 0.9) {
+    return 0.0;
+  }
+  return step(0.45, pixelRand);
+}
+
+void main() {
   vec2 uv = v_texCoord;
-  float speed = 0.5;
-  float columns = 40.0;
-  float x = floor(uv.x * columns);
-  float offset = random(vec2(x,0.0)) * 10.0;
-  float y = fract(uv.y + u_time * speed + offset);
-  float trail = smoothstep(0.1, 0.0, y);
-  float ch = step(0.9, random(vec2(x, floor(uv.y * 20.0 + u_time * 10.0))));
-  vec3 color = vec3(0.22, 1.0, 0.08) * trail * ch;
-  color += vec3(0.0, 0.5, 0.0) * trail * 0.2;
-  gl_FragColor = vec4(color * 0.4, 1.0);
+  
+  float columns = 60.0;
+  float col = floor(uv.x * columns);
+  
+  float speed = 0.2 + 0.25 * hash(vec2(col, 31.2));
+  float offset = hash(vec2(col, 89.4)) * 30.0;
+  
+  float timeOffset = u_time * speed + offset;
+  float dropY = fract(uv.y + timeOffset);
+  
+  float trail = pow(1.0 - dropY, 4.0);
+  
+  float cellRand = hash(vec2(col, floor(uv.y * 30.0)));
+  float charTime = floor(u_time * (6.0 + 8.0 * cellRand));
+  
+  float glyph = getGlyph(uv * vec2(columns, 30.0), cellRand, charTime);
+  
+  vec3 greenColor = vec3(0.2, 0.95, 0.3);
+  vec3 whiteColor = vec3(0.85, 1.0, 0.9);
+  
+  float head = smoothstep(0.06, 0.0, dropY);
+  
+  vec3 finalColor = mix(greenColor * glyph, whiteColor * glyph, head * 0.8) * trail;
+  finalColor += greenColor * trail * 0.12;
+  
+  vec3 bg = vec3(0.05, 0.06, 0.05);
+  
+  gl_FragColor = vec4(mix(bg, finalColor, trail), 1.0);
 }`;
+
     const cs = (type: number, src: string) => {
       const s = gl.createShader(type)!;
       gl.shaderSource(s, src);
       gl.compileShader(s);
+      // Log compilation error if any for debugging
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error("Shader compile error:", gl.getShaderInfoLog(s));
+      }
       return s;
     };
+    
     const prog = gl.createProgram()!;
     gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
     gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
@@ -76,7 +116,7 @@ void main(){
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full -z-10">
+    <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none">
       <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
     </div>
   );

@@ -15,10 +15,10 @@ export const Route = createFileRoute("/")({
 });
 
 const WHOAMI_LINES = [
-  "[USER]: OPERATOR_01",
-  "[ROLE]: SENIOR_PENETRATION_TESTER",
-  "[STATUS]: ENCRYPTED",
-  "[LOCATION]: [REDACTED]",
+  "Specialized Penetration Tester with 7+ years of experience in Offensive Security.",
+  "Focused on web application security, cloud infrastructure auditing, and red teaming",
+  "operations. Known for identifying critical vulnerabilities in high-security",
+  "environments",
 ];
 
 function HomePage() {
@@ -81,14 +81,11 @@ function HomePage() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="terminal-glow bg-surface-container-lowest p-6 relative">
             <div className="absolute top-0 right-0 p-2 text-[10px] text-outline-variant font-code-sm">
-              ID: 0xDEADBEEF
+              ID: 6cloudguy
             </div>
             <p className="text-primary-fixed font-headline-md mb-4">&gt; PROFILE_DATA</p>
             <p className="text-on-surface mb-6 leading-relaxed">
-              Specialized Penetration Tester with 7+ years of experience in Offensive Security.
-              Focused on web application security, cloud infrastructure auditing, and red teaming
-              operations. Known for identifying critical vulnerabilities in high-security
-              environments.
+              
             </p>
             <div className="grid grid-cols-2 gap-4 font-code-sm">
               <div className="border-l-2 border-primary-fixed pl-4">
