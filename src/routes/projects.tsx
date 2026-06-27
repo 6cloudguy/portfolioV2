@@ -23,6 +23,7 @@ type Project = {
   tags: string[];
   cta: string;
   image: string;
+  link: string;
 };
 
 const PROJECTS: Project[] = [
@@ -36,6 +37,7 @@ const PROJECTS: Project[] = [
       "> INITIALIZING DATA HARVEST... Automated reconnaissance engine designed for dark web footprinting. Leverages Tor rotating proxies and headless browser automation to bypass anti-scraping measures.",
     tags: ["Python", "Tor", "MongoDB", "Selenium"],
     cta: "VIEW_SOURCE_CODE",
+    link:"https://google.com",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy4HB1y_7-m1nvSQsdqutLjdrsoUCdUAbgatR3TveArZBgQmxCy53bgXj6-GTQpZXAWm_kh6O7Il_rPERPqKmYfk2BWKBnzQEqakCcVpD3lfX-MiMgj7hYZ6KRJytiMXcqSzNxjAHpHXfL3paETxbi6SpcR0R9lBTF3RHhqi_XMqDRG7MGXuYNiDXJ0P9TrPA-IQSfMjGaans4sUcrnH_UW_GPzilCaIzH75wHS1UY95g1J8DLazWrnUvK010VP2CQxVQELlXCc8l8",
   },
@@ -49,6 +51,7 @@ const PROJECTS: Project[] = [
       "> PAYLOAD READY FOR AIRBORNE INJECTION... Custom Raspberry Pi Zero W payload for aerial Wi-Fi auditing. Features PineAP-inspired karma attacks and WPA handshake capture on-the-fly.",
     tags: ["C++", "Aircrack-ng", "RPi", "Linux"],
     cta: "DEPLOY_DOCUMENTATION",
+    link:"https://google.com",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
   },
@@ -108,7 +111,7 @@ function ProjectsPage() {
                   <span className="material-symbols-outlined text-outline text-sm">close</span>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row h-full">
+              <div className="flex flex-col md:flex-row">
                 <div className="w-full md:w-2/5 relative h-64 md:h-auto overflow-hidden border-r border-outline-variant bg-black">
                   <img
                     className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
@@ -142,11 +145,9 @@ function ProjectsPage() {
                       ))}
                     </div>
                   </div>
-                  <button
-                    className={`w-full py-3 bg-transparent border ${accent.border} ${accent.text} font-label-caps ${accent.hover} transition-all active:scale-95`}
-                  >
+                  <a className={`w-full py-3 bg-transparent border ${accent.border} ${accent.text} font-label-caps ${accent.hover} transition-all active:scale-95 flex justify-center items-center text-center`} href={p.link}>
                     {p.cta}
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -154,22 +155,21 @@ function ProjectsPage() {
         })}
       </div>
 
-      {/* System Status Bars */}
+      {/* System Status Bars
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <StatusBar label="CORE_TEMP" value="34.2°C" color="primary" width="w-1/3" />
         <StatusBar label="NET_TRAFFIC" value="1.2 Gbps" color="secondary" width="w-2/3" />
         <StatusBar label="ACTIVE_THREADS" value="12/16" color="tertiary" width="w-4/5" />
-      </div>
+      </div> */}
 
       {/* Terminal listing */}
-      <div className="border border-outline-variant bg-black p-6 font-code-sm text-primary-fixed mb-4">
+      <div className="border border-outline-variant bg-black p-6 font-code-sm text-primary-fixed mb-4 max-w-2xl">
         <div className="mb-2">root@sentinel-os:~/projects$ ls -la</div>
-        <div className="opacity-80 grid grid-cols-1 sm:grid-cols-2 gap-x-12">
+        <div className="opacity-80 flex flex-col gap-1">
           <div>drwxr-xr-x  2 root root  4096 Oct 24 14:32 .</div>
           <div>drwxr-xr-x 15 root root  4096 Oct 20 09:15 ..</div>
           <div>-rw-r--r--  1 root root  2048 Oct 22 18:00 osint_scraper.py</div>
           <div>-rw-r--r--  1 root root 10240 Oct 21 11:24 wifi_payload.bin</div>
-          <div>-rwxr-xr-x  1 root root  5120 Oct 23 22:10 build_all.sh</div>
         </div>
         <div className="mt-4">
           root@sentinel-os:~/projects${" "}

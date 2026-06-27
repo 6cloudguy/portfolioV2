@@ -21,7 +21,7 @@ function ContactPage() {
           ESTABLISH_LINK
         </h1>
         <p className="font-code-sm text-outline mt-2">
-          SECURE COMMUNICATION CHANNEL // DIRECT REDIRECTS ACTIVE
+          SECURE COMMUNICATION CHANNEL
         </p>
       </div>
 
@@ -35,9 +35,6 @@ function ContactPage() {
               <span className="w-2 h-2 rounded-full bg-secondary-container/40" />
               <span className="w-2 h-2 rounded-full bg-primary-container/40" />
             </span>
-          </div>
-          <div className="text-primary-fixed font-code-sm animate-pulse">
-            SECURE_ROUTING_ONLINE
           </div>
         </div>
 
@@ -63,10 +60,10 @@ function ContactPage() {
               accent="secondary"
             />
             <SocialButton
-              icon="public"
-              label="X_TWITTER // BROADCAST"
-              subText="View threat intel streams, quick news updates, and open communications."
-              href="https://x.com"
+              icon="terminal"
+              label="HACKTHEBOX // LABS"
+              subText="View active penetration testing labs, CTF scores, and rank details."
+              href="https://hackthebox.com"
               accent="secondary"
             />
             <SocialButton
@@ -77,11 +74,6 @@ function ContactPage() {
               accent="primary"
             />
           </div>
-        </div>
-
-        {/* Security Alert Footer */}
-        <div className="border border-outline-variant/40 bg-surface-container-lowest/20 p-4 font-code-sm text-outline-variant text-[10px] text-center uppercase tracking-widest leading-relaxed">
-          LINK STATUS: ENCRYPTED // DEVIATION PROTECTION LEVEL 5 ACTIVE // SHIELDING NODE OPERATIONAL
         </div>
       </div>
     </SiteLayout>

@@ -26,7 +26,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         >
           SENTINEL_OS // PORTFOLIO
         </Link>
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-8 items-center absolute left-1/2 -translate-x-1/2">
           {topNav.map((n) => (
             <Link
               key={n.to}
@@ -41,7 +41,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <span className="material-symbols-outlined text-primary-fixed cursor-pointer hover:animate-pulse">
             terminal
           </span>
@@ -51,7 +51,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <button className="hidden md:block bg-primary-fixed text-on-primary-fixed px-4 py-1 font-label-caps hover:bg-white transition-all active:scale-95">
             CRITICAL_ACTION
           </button>
-        </div>
+        </div> */}
       </header>
 
       <main className="relative z-10 pt-24 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen">
@@ -64,7 +64,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <span className="hidden sm:inline">[SYSTEM_READY] // UPTIME: 99.9% // IP: 127.0.0.1</span>
           <span className="sm:hidden">[READY]</span>
         </div>
-        <div className="hidden md:flex gap-6">
+        {/* <div className="hidden md:flex gap-6">
           <a className="text-outline-variant hover:text-tertiary-fixed transition-colors font-code-sm" href="#">
             ENCRYPT_SESSION
           </a>
@@ -74,7 +74,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <a className="text-outline-variant hover:text-tertiary-fixed transition-colors font-code-sm" href="#">
             WIPE_TRACE
           </a>
-        </div>
+        </div> */}
         <div className="hidden lg:block font-label-caps text-tertiary-fixed-dim opacity-50">
           © 2024 SENTINEL_OS
         </div>

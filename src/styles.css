@@ -152,7 +152,7 @@
     pointer-events: none;
   }
   .glitch-text:hover {
-    animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+    animation: glitch 0.3s infinite;
   }
   .animate-flicker { animation: flicker 0.15s infinite; }
 }
@@ -166,9 +166,9 @@
 }
 @keyframes glitch {
   0% { transform: translate(0); text-shadow: -2px 0 #39FF14, 2px 0 #00f1fd; }
-  25% { transform: translate(-2px, 2px); }
-  50% { transform: translate(2px, -2px); text-shadow: 2px 0 #39FF14, -2px 0 #00f1fd; }
-  75% { transform: translate(-2px, -2px); }
+  25% { transform: translate(-1px, 0px); }
+  50% { transform: translate(1px, 0px); text-shadow: 2px 0 #39FF14, -2px 0 #00f1fd; }
+  75% { transform: translate(-1px, 0px); }
   100% { transform: translate(0); }
 }
 @keyframes scanline {

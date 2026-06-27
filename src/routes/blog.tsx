@@ -59,25 +59,28 @@ const ENTRIES = [
   },
 ];
 
-const CATEGORIES = [
-  ["EXPLOIT_DEV", "01"],
-  ["FORENSICS", "01"],
-  ["MALWARE_RE", "01"],
-];
+const tagCounts = ENTRIES.flatMap((e) => e.tags).reduce(
+  (acc, tag) => {
+    acc[tag] = (acc[tag] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>,
+);
+
+const CATEGORIES = Object.entries(tagCounts)
+  .map(([tag, count]) => ({
+    name: tag.replace("#", ""),
+    tag,
+    count,
+  }))
+  .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 
 function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const matchesCategory = (entry: typeof ENTRIES[0], category: string) => {
-    if (category === "EXPLOIT_DEV") return entry.tags.includes("#EDR") || entry.tags.includes("#EVASION");
-    if (category === "FORENSICS") return entry.tags.includes("#SPI") || entry.tags.includes("#HARDWARE");
-    if (category === "MALWARE_RE") return entry.tags.includes("#MALWARE") || entry.tags.includes("#TROJAN");
-    return true;
-  };
-
   const filteredEntries = ENTRIES.filter((e) => {
-    if (selectedCategory && !matchesCategory(e, selectedCategory)) {
+    if (selectedCategory && !e.tags.includes(selectedCategory)) {
       return false;
     }
     
@@ -206,51 +209,27 @@ function BlogPage() {
               )}
             </div>
             <ul className="space-y-4">
-              {CATEGORIES.map(([name, count]) => {
-                const isSelected = selectedCategory === name;
+              {CATEGORIES.map(({ name, tag, count }) => {
+                const isSelected = selectedCategory === tag;
                 return (
                   <li
-                    key={name}
-                    onClick={() => setSelectedCategory(isSelected ? null : name)}
+                    key={tag}
+                    onClick={() => setSelectedCategory(isSelected ? null : tag)}
                     className="flex justify-between items-center group cursor-pointer"
                   >
                     <span className={`font-code-sm transition-colors flex items-center gap-2 ${
                       isSelected ? "text-primary-fixed font-bold" : "text-outline group-hover:text-on-surface"
                     }`}>
-                      <span className="text-primary-fixed">{isSelected ? "●" : "->"}</span> {name}
+                      <span className="text-primary-fixed">{isSelected ? "●" : "->"}</span> #{name}
                     </span>
-                    <span className="font-code-sm text-outline-variant text-[10px]">[ {count} ]</span>
+                    <span className="font-code-sm text-outline-variant text-[10px]">
+                      [ {String(count).padStart(2, "0")} ]
+                    </span>
                   </li>
                 );
               })}
             </ul>
           </div>
-
-          <div className="border border-outline-variant bg-black p-4 relative overflow-hidden group">
-            <div className="font-label-caps text-outline-variant mb-4 flex justify-between items-center">
-              <span>VULNERABILITY_INDEX</span>
-              <span className="animate-pulse text-error">● LIVE</span>
-            </div>
-            <div className="flex items-end gap-1 h-32">
-              {[40, 65, 90, 55, 30, 75].map((h, i) => (
-                <div
-                  key={i}
-                  className="flex-1 bg-primary-fixed/20 border-t border-primary-fixed transition-all duration-700"
-                  style={{ height: `${h}%` }}
-                />
-              ))}
-            </div>
-            <div className="mt-4 pt-4 border-t border-outline-variant/30 text-[10px] font-code-sm text-outline-variant text-center uppercase tracking-widest">
-              Global Threat Intel Stream [CONNECTED]
-            </div>
-          </div>
-
-          <button className="w-full py-6 border-2 border-error text-error font-headline-md relative overflow-hidden hover:bg-error hover:text-on-error transition-all">
-            CRITICAL_ACTION
-            <div className="text-[10px] font-code-sm mt-1 opacity-70">
-              INITIATE_ENGAGEMENT_SEQUENCE
-            </div>
-          </button>
         </div>
       </section>
     </SiteLayout>
