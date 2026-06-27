@@ -1,0 +1,17 @@
+[
+  {
+    "sender_id": "qwe",
+    "channel": "qwe@qwe.qwe",
+    "protocol": "general",
+    "payload": "weqweqwe\n",
+    "timestamp": "2026-06-27T01:52:06.926Z"
+  },
+  {
+    "sender_id": "qwe",
+    "channel": "qwe@qwe.qwe",
+    "protocol": "general",
+    "payload": "qwqweqw",
+    "ip": "127.0.0.1",
+    "timestamp": "2026-06-27T01:56:10.942Z"
+  }
+]

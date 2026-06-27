@@ -9,13 +9,6 @@ const topNav = [
   { label: "CONTACT", to: "/contact" },
 ] as const;
 
-const sideNav = [
-  { label: "SYSTEM", icon: "monitor_heart", to: "/" },
-  { label: "PROJECTS", icon: "account_tree", to: "/projects" },
-  { label: "BLOG", icon: "rss_feed", to: "/blog" },
-  { label: "CONTACT", icon: "terminal", to: "/contact" },
-] as const;
-
 export function SiteLayout({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
@@ -61,43 +54,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-16 h-[calc(100vh-64px)] hidden md:flex flex-col z-40 border-r border-outline-variant bg-surface-container-lowest w-64">
-        <div className="p-6 border-b border-outline-variant">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-secondary-container/20 border border-secondary-fixed flex items-center justify-center">
-              <span className="material-symbols-outlined text-secondary-fixed">person</span>
-            </div>
-            <div>
-              <p className="font-label-caps text-secondary-fixed text-[10px]">OPERATOR_01</p>
-              <p className="text-[8px] text-outline font-mono">STATUS: ENCRYPTED</p>
-            </div>
-          </div>
-        </div>
-        <nav className="flex-1 py-4">
-          {sideNav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className={
-                isActive(n.to)
-                  ? "text-secondary-fixed bg-secondary-container/20 border-l-4 border-secondary-fixed pl-4 py-3 flex items-center gap-3 font-label-caps"
-                  : "text-outline pl-4 py-3 hover:text-secondary-fixed hover:bg-surface-container-high flex items-center gap-3 transition-all font-label-caps"
-              }
-            >
-              <span className="material-symbols-outlined">{n.icon}</span>
-              <span>{n.label}</span>
-            </Link>
-          ))}
-        </nav>
-        <div className="p-4">
-          <button className="w-full border border-secondary-fixed text-secondary-fixed py-2 font-label-caps hover:bg-secondary-fixed hover:text-black transition-all">
-            CONNECT_TUNNEL
-          </button>
-        </div>
-      </aside>
-
-      <main className="relative z-10 md:ml-64 pt-24 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen">
+      <main className="relative z-10 pt-24 pb-24 px-margin-mobile md:px-margin-desktop min-h-screen">
         {children}
       </main>
 

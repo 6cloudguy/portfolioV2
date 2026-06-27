@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/blog")({
@@ -42,16 +43,55 @@ const ENTRIES = [
     overlay: "bg-secondary-fixed/10",
     accent: "text-secondary-fixed",
   },
+  {
+    id: "#00134",
+    severity: "WARNING",
+    severityColor: "border-outline text-outline",
+    timestamp: "T-MINUS: 2023.09.05 // 22:50 GMT",
+    title: "ANALYSIS: RE_ENGINEERING_BANKING_TROJAN_V2",
+    excerpt:
+      "Behavioral patterns suggest a modular command-and-control infrastructure with domain generation algorithms enabled...",
+    tags: ["#MALWARE", "#TROJAN"],
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCgIMUGLs5q4eEworArjde7lhMLU0UDna46hdpTqXIRbMi7ax_L-OTbhTMSf1F1WYyIgycwrubNgnnQJ7BUBwNOpL0CGXSSnEXKgYJbfF3rvaN3OnKh94goyvbXZJKhp29hq3lvK5xehUdXL782IckP8LD48BLjd0EjqH7fP2i3Zhn1YWUssg6IlPj9FfMbbqp9YwPkTo2GhX5FKQbu_ARcTBYJQV9cR9EcwcY62rALeV9pZbxR871IOzedHDb3snb0-556b08UGOZ7",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+  },
 ];
 
 const CATEGORIES = [
-  ["EXPLOIT_DEV", "08"],
-  ["FORENSICS", "14"],
-  ["NET_PENTEST", "22"],
-  ["MALWARE_RE", "05"],
+  ["EXPLOIT_DEV", "01"],
+  ["FORENSICS", "01"],
+  ["MALWARE_RE", "01"],
 ];
 
 function BlogPage() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const matchesCategory = (entry: typeof ENTRIES[0], category: string) => {
+    if (category === "EXPLOIT_DEV") return entry.tags.includes("#EDR") || entry.tags.includes("#EVASION");
+    if (category === "FORENSICS") return entry.tags.includes("#SPI") || entry.tags.includes("#HARDWARE");
+    if (category === "MALWARE_RE") return entry.tags.includes("#MALWARE") || entry.tags.includes("#TROJAN");
+    return true;
+  };
+
+  const filteredEntries = ENTRIES.filter((e) => {
+    if (selectedCategory && !matchesCategory(e, selectedCategory)) {
+      return false;
+    }
+    
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return true;
+
+    return (
+      e.title.toLowerCase().includes(query) ||
+      e.excerpt.toLowerCase().includes(query) ||
+      e.id.toLowerCase().includes(query) ||
+      e.tags.some((t) => t.toLowerCase().includes(query))
+    );
+  });
+
   return (
     <SiteLayout>
       <div className="mb-12 border-l-4 border-primary-fixed pl-6">
@@ -72,75 +112,64 @@ function BlogPage() {
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
         {/* Logs */}
         <div className="lg:col-span-8 space-y-6">
-          {ENTRIES.map((e) => (
-            <article
-              key={e.id}
-              className="relative group border border-outline-variant bg-surface-container-low hover:bg-surface-container transition-all overflow-hidden"
-            >
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full md:w-48 h-48 md:h-auto relative shrink-0">
-                  <img
-                    className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500"
-                    src={e.image}
-                    alt={e.title}
-                  />
-                  <div className={`absolute inset-0 ${e.overlay} mix-blend-overlay`} />
-                </div>
-                <div className="p-6 flex flex-col justify-between flex-1">
-                  <div>
-                    <div className="flex justify-between items-start mb-4 gap-2 flex-wrap">
-                      <div className="font-label-caps text-outline flex items-center gap-2">
-                        <span className={e.accent}>{e.id}</span>
-                        <span className="w-1 h-1 bg-outline rounded-full" />
-                        {e.timestamp}
-                      </div>
-                      <span
-                        className={`px-2 py-0.5 border ${e.severityColor} text-[10px] font-bold font-code-sm uppercase tracking-widest`}
-                      >
-                        [ {e.severity} ]
-                      </span>
-                    </div>
-                    <h2 className={`font-headline-md text-on-surface mb-3 group-hover:${e.accent} transition-colors`}>
-                      {e.title}
-                    </h2>
-                    <p className="text-outline font-body-md line-clamp-2 mb-6">{e.excerpt}</p>
-                  </div>
-                  <div className="flex items-center justify-between flex-wrap gap-2">
-                    <div className="flex gap-2">
-                      {e.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[10px] font-code-sm text-secondary-fixed bg-secondary-fixed/10 px-2 py-1 border border-secondary-fixed/20"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <a className="font-label-caps text-primary-fixed hover:underline" href="#">
-                      [ READ_MORE ]
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-
-          <article className="p-6 border border-outline-variant bg-surface-container-low hover:bg-surface-container transition-all group">
-            <div className="flex justify-between items-start mb-2">
-              <div className="font-label-caps text-outline">T-MINUS: 2023.09.05 // 22:50 GMT</div>
-              <span className="text-outline font-code-sm text-[10px] uppercase">ID: LOG_S_992</span>
+          {filteredEntries.length === 0 ? (
+            <div className="p-12 border border-dashed border-outline-variant text-center font-code-sm text-outline">
+              &gt; NO ENTRIES MATCHING REQUEST SYSTEM PARAMETERS.
             </div>
-            <h3 className="font-headline-md text-on-surface group-hover:text-primary-fixed transition-colors mb-2">
-              ANALYSIS: RE_ENGINEERING_BANKING_TROJAN_V2
-            </h3>
-            <p className="text-outline font-body-md mb-4 italic">
-              "Behavioral patterns suggest a modular command-and-control infrastructure with domain
-              generation algorithms enabled..."
-            </p>
-            <a className="font-label-caps text-primary-fixed hover:underline" href="#">
-              [ READ_MORE ]
-            </a>
-          </article>
+          ) : (
+            filteredEntries.map((e) => (
+              <article
+                key={e.id}
+                className="relative group border border-outline-variant bg-surface-container-low hover:bg-surface-container transition-all overflow-hidden"
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div className="w-full md:w-48 h-48 md:h-auto relative shrink-0">
+                    <img
+                      className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500"
+                      src={e.image}
+                      alt={e.title}
+                    />
+                    <div className={`absolute inset-0 ${e.overlay} mix-blend-overlay`} />
+                  </div>
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <div className="flex justify-between items-start mb-4 gap-2 flex-wrap">
+                        <div className="font-label-caps text-outline flex items-center gap-2">
+                          <span className={e.accent}>{e.id}</span>
+                          <span className="w-1 h-1 bg-outline rounded-full" />
+                          {e.timestamp}
+                        </div>
+                        <span
+                          className={`px-2 py-0.5 border ${e.severityColor} text-[10px] font-bold font-code-sm uppercase tracking-widest`}
+                        >
+                          [ {e.severity} ]
+                        </span>
+                      </div>
+                      <h2 className={`font-headline-md text-on-surface mb-3 group-hover:${e.accent} transition-colors`}>
+                        {e.title}
+                      </h2>
+                      <p className="text-outline font-body-md line-clamp-2 mb-6">{e.excerpt}</p>
+                    </div>
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="flex gap-2">
+                        {e.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="text-[10px] font-code-sm text-secondary-fixed bg-secondary-fixed/10 px-2 py-1 border border-secondary-fixed/20"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <a className="font-label-caps text-primary-fixed hover:underline" href="#">
+                        [ READ_MORE ]
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))
+          )}
         </div>
 
         {/* Sidebar */}
@@ -158,23 +187,42 @@ function BlogPage() {
                 className="w-full bg-black border border-outline-variant text-primary-fixed font-code-sm pl-8 py-2 focus:border-primary-fixed outline-none placeholder:text-outline-variant"
                 placeholder="search_logs..."
                 type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>
 
           <div className="p-6 border border-outline-variant bg-black">
-            <div className="font-label-caps text-secondary-fixed mb-6 border-b border-outline-variant pb-2">
-              NODE_CATEGORIES
+            <div className="font-label-caps text-secondary-fixed mb-6 border-b border-outline-variant pb-2 flex justify-between items-center">
+              <span>NODE_CATEGORIES</span>
+              {selectedCategory && (
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="text-[9px] text-outline hover:text-secondary-fixed font-code-sm border border-outline/30 px-1 py-0.5 cursor-pointer"
+                >
+                  [ RESET ]
+                </button>
+              )}
             </div>
             <ul className="space-y-4">
-              {CATEGORIES.map(([name, count]) => (
-                <li key={name} className="flex justify-between items-center group cursor-pointer">
-                  <span className="font-code-sm text-outline group-hover:text-on-surface transition-colors flex items-center gap-2">
-                    <span className="text-primary-fixed">-&gt;</span> {name}
-                  </span>
-                  <span className="font-code-sm text-outline-variant text-[10px]">[ {count} ]</span>
-                </li>
-              ))}
+              {CATEGORIES.map(([name, count]) => {
+                const isSelected = selectedCategory === name;
+                return (
+                  <li
+                    key={name}
+                    onClick={() => setSelectedCategory(isSelected ? null : name)}
+                    className="flex justify-between items-center group cursor-pointer"
+                  >
+                    <span className={`font-code-sm transition-colors flex items-center gap-2 ${
+                      isSelected ? "text-primary-fixed font-bold" : "text-outline group-hover:text-on-surface"
+                    }`}>
+                      <span className="text-primary-fixed">{isSelected ? "●" : "->"}</span> {name}
+                    </span>
+                    <span className="font-code-sm text-outline-variant text-[10px]">[ {count} ]</span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
