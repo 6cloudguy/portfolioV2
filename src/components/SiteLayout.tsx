@@ -24,7 +24,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           to="/"
           className="font-headline-md text-primary-fixed drop-shadow-[0_0_8px_rgba(42,229,0,0.5)] tracking-tighter"
         >
-          SENTINEL_OS // PORTFOLIO
+          PRANAV P ~/ 
         </Link>
         <nav className="hidden md:flex gap-8 items-center absolute left-1/2 -translate-x-1/2">
           {topNav.map((n) => (

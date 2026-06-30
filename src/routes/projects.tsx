@@ -28,16 +28,16 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    node: "NODE_01 // CASE_STUDY",
-    category: "CASE",
+    node: "NODE_01 // SCRIPT",
+    category: "SCRIPT",
     accent: "primary",
-    title: "OSINT_SCRAPER_v2",
-    badge: "[ SEVERITY: INFO ]",
+    title: "AUTOFN",
+    badge: "[ FOCUS: RECON ]",
     description:
-      "> INITIALIZING DATA HARVEST... Automated reconnaissance engine designed for dark web footprinting. Leverages Tor rotating proxies and headless browser automation to bypass anti-scraping measures.",
-    tags: ["Python", "Tor", "MongoDB", "Selenium"],
+      "> INITIALIZING DATA HARVEST... Automated reconnaissance engine designed for Bug Bounty Hunting. Uses multiple reconaissance tools to form easily and smartly identify entrypoints and scanning automation.",
+    tags: ["Bash", "Nmap", "Ffuf", "Exploitdb"],
     cta: "VIEW_SOURCE_CODE",
-    link:"https://google.com",
+    link:"https://github.com/6cloudguy/autofn",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDy4HB1y_7-m1nvSQsdqutLjdrsoUCdUAbgatR3TveArZBgQmxCy53bgXj6-GTQpZXAWm_kh6O7Il_rPERPqKmYfk2BWKBnzQEqakCcVpD3lfX-MiMgj7hYZ6KRJytiMXcqSzNxjAHpHXfL3paETxbi6SpcR0R9lBTF3RHhqi_XMqDRG7MGXuYNiDXJ0P9TrPA-IQSfMjGaans4sUcrnH_UW_GPzilCaIzH75wHS1UY95g1J8DLazWrnUvK010VP2CQxVQELlXCc8l8",
   },
@@ -45,13 +45,27 @@ const PROJECTS: Project[] = [
     node: "NODE_02 // HARDWARE",
     category: "HARDWARE",
     accent: "secondary",
-    title: "WIFI_DRONE_PAYLOAD",
-    badge: "[ STATUS: DEPLOYED ]",
+    title: "RADAR SYSTEM : Internship Project",
+    badge: "[ STATUS: PROTOTYPE ]",
     description:
-      "> PAYLOAD READY FOR AIRBORNE INJECTION... Custom Raspberry Pi Zero W payload for aerial Wi-Fi auditing. Features PineAP-inspired karma attacks and WPA handshake capture on-the-fly.",
-    tags: ["C++", "Aircrack-ng", "RPi", "Linux"],
-    cta: "DEPLOY_DOCUMENTATION",
-    link:"https://google.com",
+      "> READY FOR DETECTION AND TRACKING... Custom Aruduino UNO system for real-time object detection using ultrasonic sensor and servo motor. Features capture, tracking and alerting of objects on-the-run.",
+    tags: ["C++", "Arduino-UNO", "Python", "Pygame"],
+    cta: "VIEW_DOCUMENTATION",
+    link:"https://github.com/6cloudguy/radariot",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
+  },
+  {
+    node: "NODE_03 // EXPLOIT",
+    category: "EXPLOIT",
+    accent: "secondary",
+    title: "TV STREAMER // EXPLOIT",
+    badge: "[ STATUS: PROTOTYPE ]",
+    description:
+      "> READY FOR DETECTION AND TRACKING... Custom Aruduino UNO system for real-time object detection using ultrasonic sensor and servo motor. Features capture, tracking and alerting of objects on-the-run.",
+    tags: ["C++", "Arduino-UNO", "Python", "Pygame"],
+    cta: "VIEW_POC",
+    link:"https://github.com/6cloudguy/radariot",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
   },
@@ -145,7 +159,7 @@ function ProjectsPage() {
                       ))}
                     </div>
                   </div>
-                  <a className={`w-full py-3 bg-transparent border ${accent.border} ${accent.text} font-label-caps ${accent.hover} transition-all active:scale-95 flex justify-center items-center text-center`} href={p.link}>
+                  <a className={`w-full py-3 bg-transparent border ${accent.border} ${accent.text} font-label-caps ${accent.hover} transition-all active:scale-95 flex justify-center items-center text-center`} href={p.link} target="blank">
                     {p.cta}
                   </a>
                 </div>
