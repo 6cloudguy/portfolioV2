@@ -25,7 +25,7 @@ const ENTRIES = [
       "A writeup on how I started with an nmap on my Sony Bravia TV and ended up with a full media hijacking and DoS probabilities in a couple of minutes.",
     tags: ["COMINGSOON","BUG", "IOT"],
     image:
-      "../../assets/pcs.png",
+      "/assets/pcs.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"",
@@ -40,7 +40,7 @@ const ENTRIES = [
       "A writeup on how I hacked the HTB box INTERPRETER.",
     tags: ["HTB","LINUX","LABS", "MEDIUM"],
     image:
-      "../../assets/interpreter.png",
+      "/assets/interpreter.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/interpreter/",
@@ -55,7 +55,7 @@ const ENTRIES = [
       "A writeup on how I hacked the HTB box STRUTTED.",
     tags: ["HTB","LINUX","LABS", "MEDIUM"],
     image:
-      "../../assets/strutted.png",
+      "/assets/strutted.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/strutted/",
@@ -70,7 +70,7 @@ const ENTRIES = [
       "A writeup on how I hacked the HTB box SOULMATE.",
     tags: ["HTB","LINUX","LABS","EASY"],
     image:
-      "../../assets/soulmate.png",
+      "/assets/soulmate.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://medium.com/@6cloudguy/htb-soulmate-796e854e097b",
@@ -85,7 +85,7 @@ const ENTRIES = [
       "My note I made for the File-Transfer module from HTB Academy.",
     tags: ["HTB", "NOTES"],
     image:
-      "../../assets/filetransfer.webp",
+      "/assets/filetransfer.webp",
     overlay: "bg-bluish/10",
     accent: "text-bluish",
     link:"https://6cloudguy.github.io/posts/filetransfer/",
@@ -100,7 +100,7 @@ const ENTRIES = [
       "A writeup on how I hacked the HTB box ARTIFICIAL.",
     tags: ["HTB","LINUX","LABS", "EASY"],
     image:
-      "../../assets/artificial.png",
+      "/assets/artificial.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/artificial/",
@@ -115,7 +115,7 @@ const ENTRIES = [
       "A writeup on how I hacked the VulnHub box Me And My Girlfriend.",
     tags: ["VULNHUB","LINUX","LABS", "EASY"],
     image:
-      "../../assets/vuln.webp",
+      "/assets/vuln.webp",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/meandmygf1/",
@@ -130,7 +130,7 @@ const ENTRIES = [
       "A writeup on how I hacked the HTB box EDITOR.",
     tags: ["HTB","LINUX","LABS", "EASY"],
     image:
-      "../../assets/editor.png",
+      "/assets/editor.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/editor/",
@@ -145,7 +145,7 @@ const ENTRIES = [
       "My note I made for the HTB Academy module 'JS OBFUSCATION'",
     tags: ["NOTES", "HTB"],
     image:
-      "../../assets/obfuscation.webp",
+      "/assets/obfuscation.webp",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/jsdeobfuscation/",
