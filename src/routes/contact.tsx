@@ -4,9 +4,9 @@ import { SiteLayout } from "@/components/SiteLayout";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "SENTINEL_OS // CONTACT_PORTAL" },
+      { title: "PRANAV P // CONTACT_PORTAL" },
       { name: "description", content: "Establish a direct communication channel with OPERATOR_01 via secure uplink redirects." },
-      { property: "og:title", content: "SENTINEL_OS // CONTACT_PORTAL" },
+      { property: "og:title", content: "PRANAV P // CONTACT_PORTAL" },
       { property: "og:description", content: "Establish a direct communication channel with OPERATOR_01 via secure uplink redirects." },
     ],
   }),

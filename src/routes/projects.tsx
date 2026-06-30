@@ -4,9 +4,9 @@ import { SiteLayout } from "@/components/SiteLayout";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "SENTINEL_OS // PROJECTS" },
+      { title: "PRANAV P // PROJECTS" },
       { name: "description", content: "Repository of high-impact cybersecurity assets — OSINT, hardware payloads, red team tooling." },
-      { property: "og:title", content: "SENTINEL_OS // PROJECTS" },
+      { property: "og:title", content: "PRANAV P // PROJECTS" },
       { property: "og:description", content: "Repository of high-impact cybersecurity assets — OSINT, hardware payloads, red team tooling." },
     ],
   }),

@@ -77,9 +77,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SENTINEL_OS // PORTFOLIO" },
+      { title: "PRANAV P // PORTFOLIO" },
       { name: "description", content: "Encrypted portfolio of OPERATOR_01 — penetration testing, red team operations, and offensive security research." },
-      { property: "og:title", content: "SENTINEL_OS // PORTFOLIO" },
+      { property: "og:title", content: "PRANAV P // PORTFOLIO" },
       { property: "og:description", content: "Encrypted portfolio of OPERATOR_01 — penetration testing, red team operations, and offensive security research." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

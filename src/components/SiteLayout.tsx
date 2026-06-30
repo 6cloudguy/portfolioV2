@@ -76,7 +76,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </a>
         </div> */}
         <div className="hidden lg:block font-label-caps text-tertiary-fixed-dim opacity-50">
-          © 2024 SENTINEL_OS
+          © 2026 PRANAV P
         </div>
       </footer>
     </div>
