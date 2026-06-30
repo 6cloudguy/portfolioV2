@@ -7,10 +7,12 @@
 @theme {
   --color-on-error: #690005;
   --color-outline: #85967c;
+  --color-grey: #85967c;
   --color-on-tertiary-fixed: #410008;
   --color-on-primary-fixed: #022100;
   --color-tertiary-fixed-dim: #ffb3b2;
   --color-secondary-fixed: #6ff6ff;
+  --color-bluish: #6ff6ff;
   --color-on-surface-variant: #baccb0;
   --color-outline-variant: #3c4b35;
   --color-on-tertiary: #680012;
@@ -51,6 +53,7 @@
   --color-on-surface: #e2e2e2;
   --color-inverse-on-surface: #303030;
   --color-error: #ffb4ab;
+  --color-redish: #ffb4ab;
   --color-on-primary-fixed-variant: #095300;
 
   --font-mono: "JetBrains Mono", ui-monospace, monospace;

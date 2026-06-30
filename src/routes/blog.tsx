@@ -16,23 +16,54 @@ export const Route = createFileRoute("/blog")({
 
 const ENTRIES = [
   {
-    id: "#00142",
-    severity: "CRITICAL",
-    severityColor: "border-error text-error",
-    timestamp: "T-MINUS: 2023.10.12 // 04:22 GMT",
-    title: "BYPASSING_EDR: HEURISTIC_EVASION",
+    id: "#00102",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
+    title: "MEDIA HIJACK: NMAP TO HIJACKING TV",
     excerpt:
-      "Techniques for circumventing modern Endpoint Detection and Response systems using direct syscall invocation and memory-only execution payloads. Analysis of hooking mechanisms...",
-    tags: ["#EDR", "#EVASION"],
+      "A writeup on how I started with an nmap on my Sony Bravia TV and ended up with a full media hijacking and DoS probabilities in a couple of minutes.",
+    tags: ["COMINGSOON","BUG", "IOT"],
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBmhE3EuN1AF6CZJlbv7Jq2zqDYpV3BB8rsr5RZ64Emoy1tv_YxgkAvp9OmJaVAs4z8RON_IXSLkfh82epLhjobSg1iOYjiNoFoSqD8gxQhzJGVQYR9xZbzmD_jE85p4s75PoG37bZoPe8EuSIAnW1alKk9GHOgfIe2phM5oyJV9snEsu0_SQUie-Fr6ItsribYkH_fASbEODzuokpMrr0ua1EH1KAW06kxogHPYYOePa3WuRN4KyKhKeIGx_WRf4J6m0VBzHk46F7Z",
+      "../../assets/pcs.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
+    link:"",
+  },
+  {
+    id: "#00103",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
+    title: "STRUTTED",
+    excerpt:
+      "A writeup on how I hacked the HTB box STRUTTED.",
+    tags: ["HTB","LINUX","LABS", "MEDIUM"],
+    image:
+      "../../assets/strutted.png",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://6cloudguy.github.io/posts/strutted/",
+  },
+  {
+    id: "#00104",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
+    title: "SOULMATE",
+    excerpt:
+      "A writeup on how I hacked the HTB box SOULMATE.",
+    tags: ["HTB","LINUX","LABS","EASY"],
+    image:
+      "../../assets/soulmate.png",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://medium.com/@6cloudguy/htb-soulmate-796e854e097b",
   },
   {
     id: "#00139",
-    severity: "INFO",
-    severityColor: "border-secondary-fixed text-secondary-fixed",
+    severity: "NOTES",
+    severityColor: "border-bluish text-bluish",
     timestamp: "T-MINUS: 2023.09.28 // 11:15 GMT",
     title: "IOT_FIRMWARE_EXTRACTION",
     excerpt:
@@ -40,13 +71,14 @@ const ENTRIES = [
     tags: ["#HARDWARE", "#SPI"],
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuC5BReCrJ65drGXft2lGTrA_-NsIFmq7QPj9DdUrH4KTJPL2M_fPJdU6Yeb9CIMa44xd3cbmafkF8JPrptMPK-X4AI_pkqhWSN-IKHH-8hgo7JSb5dTLfL117lGzDFV19ZxlK1b5JAydHgd8pomSj5LPpZ7gogjpTN-OyMCgeV2X6-7Dhnc5KTy5aOrgy_PeQZtptLqG0n_AlETnONp8DAh51lzi19fnwvQ4hee9GuIdDRXN2Oa-TOA65RDk7pA7eRxlQKTTh-lLsid",
-    overlay: "bg-secondary-fixed/10",
-    accent: "text-secondary-fixed",
+    overlay: "bg-bluish/10",
+    accent: "text-bluish",
+    link:"",
   },
   {
     id: "#00134",
-    severity: "WARNING",
-    severityColor: "border-outline text-outline",
+    severity: "INFO",
+    severityColor: "border-grey text-grey",
     timestamp: "T-MINUS: 2023.09.05 // 22:50 GMT",
     title: "ANALYSIS: RE_ENGINEERING_BANKING_TROJAN_V2",
     excerpt:
@@ -56,6 +88,7 @@ const ENTRIES = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCgIMUGLs5q4eEworArjde7lhMLU0UDna46hdpTqXIRbMi7ax_L-OTbhTMSf1F1WYyIgycwrubNgnnQJ7BUBwNOpL0CGXSSnEXKgYJbfF3rvaN3OnKh94goyvbXZJKhp29hq3lvK5xehUdXL782IckP8LD48BLjd0EjqH7fP2i3Zhn1YWUssg6IlPj9FfMbbqp9YwPkTo2GhX5FKQbu_ARcTBYJQV9cR9EcwcY62rALeV9pZbxR871IOzedHDb3snb0-556b08UGOZ7",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
+    link:"",
   },
 ];
 
@@ -108,7 +141,7 @@ function BlogPage() {
         </h1>
         <p className="text-outline font-body-md mt-2 max-w-2xl">
           Unfiltered chronolog of operational maneuvers, vulnerability research, and digital
-          forensic findings. Documented for internal review and recruitment verification.
+          forensic findings. Documented for personal review and recruitment verification.
         </p>
       </div>
 
@@ -164,7 +197,7 @@ function BlogPage() {
                           </span>
                         ))}
                       </div>
-                      <a className="font-label-caps text-primary-fixed hover:underline" href="#">
+                      <a className="font-label-caps text-primary-fixed hover:underline" href={e.link} target="blank">
                         [ READ_MORE ]
                       </a>
                     </div>
