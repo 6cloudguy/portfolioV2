@@ -31,6 +31,21 @@ const ENTRIES = [
     link:"",
   },
   {
+    id: "#00112",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2025.12.06 // 13:16 GMT",
+    title: "INTERPRETER",
+    excerpt:
+      "A writeup on how I hacked the HTB box INTERPRETER.",
+    tags: ["HTB","LINUX","LABS", "MEDIUM"],
+    image:
+      "../../assets/interpreter.png",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://6cloudguy.github.io/posts/interpreter/",
+  },
+  {
     id: "#00103",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
@@ -67,7 +82,7 @@ const ENTRIES = [
     timestamp: "T-MINUS: 2025.08.03 // 11:15 GMT",
     title: "NOTES // FILE_TRANSFER",
     excerpt:
-      "My note i made from the file-treansfer module from HTB Academy.",
+      "My note I made for the File-Transfer module from HTB Academy.",
     tags: ["HTB", "NOTES"],
     image:
       "../../assets/filetransfer.webp",
@@ -76,19 +91,64 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/filetransfer/",
   },
   {
+    id: "#00106",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2025.10.1 // 09:16 GMT",
+    title: "ARTIFICIAL",
+    excerpt:
+      "A writeup on how I hacked the HTB box ARTIFICIAL.",
+    tags: ["HTB","LINUX","LABS", "EASY"],
+    image:
+      "../../assets/artificial.png",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://6cloudguy.github.io/posts/artificial/",
+  },
+  {
+    id: "#00110",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2025.11.16 // 03:28 GMT",
+    title: "ME AND MY GIRLFRIEND 1",
+    excerpt:
+      "A writeup on how I hacked the VulnHub box Me And My Girlfriend.",
+    tags: ["VulnHub","LINUX","LABS", "EASY"],
+    image:
+      "../../assets/vuln.webp",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://6cloudguy.github.io/posts/meandmygf1/",
+  },
+  {
+    id: "#00112",
+    severity: "WRITEUP",
+    severityColor: "border-redish text-redish",
+    timestamp: "T-MINUS: 2025.12.06 // 13:16 GMT",
+    title: "EDITOR",
+    excerpt:
+      "A writeup on how I hacked the HTB box EDITOR.",
+    tags: ["HTB","LINUX","LABS", "EASY"],
+    image:
+      "../../assets/editor.png",
+    overlay: "bg-primary-fixed/10",
+    accent: "text-primary-fixed",
+    link:"https://6cloudguy.github.io/posts/editor/",
+  },
+  {
     id: "#00134",
     severity: "INFO",
     severityColor: "border-grey text-grey",
     timestamp: "T-MINUS: 2023.09.05 // 22:50 GMT",
-    title: "ANALYSIS: RE_ENGINEERING_BANKING_TROJAN_V2",
+    title: "JAVASCRIPT DEOBFUSCATION",
     excerpt:
-      "Behavioral patterns suggest a modular command-and-control infrastructure with domain generation algorithms enabled...",
-    tags: ["#MALWARE", "#TROJAN"],
+      "My note I made for the HTB Academy module 'JS OBFUSCATION'",
+    tags: ["NOTES", "HTB"],
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCgIMUGLs5q4eEworArjde7lhMLU0UDna46hdpTqXIRbMi7ax_L-OTbhTMSf1F1WYyIgycwrubNgnnQJ7BUBwNOpL0CGXSSnEXKgYJbfF3rvaN3OnKh94goyvbXZJKhp29hq3lvK5xehUdXL782IckP8LD48BLjd0EjqH7fP2i3Zhn1YWUssg6IlPj9FfMbbqp9YwPkTo2GhX5FKQbu_ARcTBYJQV9cR9EcwcY62rALeV9pZbxR871IOzedHDb3snb0-556b08UGOZ7",
+      "../../assets/obfuscation.webp",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
-    link:"",
+    link:"https://6cloudguy.github.io/posts/jsdeobfuscation/",
   },
 ];
 
