@@ -64,16 +64,16 @@ const ENTRIES = [
     id: "#00139",
     severity: "NOTES",
     severityColor: "border-bluish text-bluish",
-    timestamp: "T-MINUS: 2023.09.28 // 11:15 GMT",
-    title: "IOT_FIRMWARE_EXTRACTION",
+    timestamp: "T-MINUS: 2025.08.03 // 11:15 GMT",
+    title: "NOTES // FILE_TRANSFER",
     excerpt:
-      "A deep dive into dumping flash memory from embedded devices via UART and SPI. Leveraging Binwalk for file system reconstruction and hardcoded credential discovery.",
-    tags: ["#HARDWARE", "#SPI"],
+      "My note i made from the file-treansfer module from HTB Academy.",
+    tags: ["HTB", "NOTES"],
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC5BReCrJ65drGXft2lGTrA_-NsIFmq7QPj9DdUrH4KTJPL2M_fPJdU6Yeb9CIMa44xd3cbmafkF8JPrptMPK-X4AI_pkqhWSN-IKHH-8hgo7JSb5dTLfL117lGzDFV19ZxlK1b5JAydHgd8pomSj5LPpZ7gogjpTN-OyMCgeV2X6-7Dhnc5KTy5aOrgy_PeQZtptLqG0n_AlETnONp8DAh51lzi19fnwvQ4hee9GuIdDRXN2Oa-TOA65RDk7pA7eRxlQKTTh-lLsid",
+      "../../assets/filetransfer.webp",
     overlay: "bg-bluish/10",
     accent: "text-bluish",
-    link:"",
+    link:"https://6cloudguy.github.io/posts/filetransfer/",
   },
   {
     id: "#00134",
