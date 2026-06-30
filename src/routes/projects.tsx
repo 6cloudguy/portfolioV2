@@ -67,7 +67,7 @@ const PROJECTS: Project[] = [
     cta: "VIEW_SCRIPT",
     link:"https://github.com/6cloudguy/tvstreamer",
     image:
-      "../../assets/pcs.png",
+      "/assets/pcs.png",
   },
 ];
 
