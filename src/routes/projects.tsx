@@ -39,7 +39,7 @@ const PROJECTS: Project[] = [
     cta: "VIEW_SOURCE_CODE",
     link:"https://github.com/6cloudguy/autofn",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDy4HB1y_7-m1nvSQsdqutLjdrsoUCdUAbgatR3TveArZBgQmxCy53bgXj6-GTQpZXAWm_kh6O7Il_rPERPqKmYfk2BWKBnzQEqakCcVpD3lfX-MiMgj7hYZ6KRJytiMXcqSzNxjAHpHXfL3paETxbi6SpcR0R9lBTF3RHhqi_XMqDRG7MGXuYNiDXJ0P9TrPA-IQSfMjGaans4sUcrnH_UW_GPzilCaIzH75wHS1UY95g1J8DLazWrnUvK010VP2CQxVQELlXCc8l8",
+      "/assets/server.png",
   },
   {
     node: "NODE_02 // HARDWARE",
@@ -53,7 +53,7 @@ const PROJECTS: Project[] = [
     cta: "VIEW_DOCUMENTATION",
     link:"https://github.com/6cloudguy/radariot",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
+      "/assets/chip.png",
   },
   {
     node: "NODE_03 // SCRIPT",

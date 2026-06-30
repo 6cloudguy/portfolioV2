@@ -258,7 +258,7 @@ function HomePage() {
                 </div>
                 <div className="border-l-2 border-tertiary-fixed-dim pl-4">
                   <span className="text-outline block uppercase text-[10px]">Base of Ops</span>
-                  <span className="text-tertiary-fixed-dim">INDIA // [ENCRYPTED]</span>
+                  <span className="text-tertiary-fixed-dim">INDIA</span>
                 </div>
                 <div className="border-l-2 border-outline-variant pl-4">
                   <span className="text-outline block uppercase text-[10px]">Status</span>
@@ -282,7 +282,7 @@ function HomePage() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
               <p className="font-code-sm text-primary-fixed">
-                EST_LATENCY: 14ms // LOCATION: [ENCRYPTED]
+                EST_LATENCY: 14ms // LOCATION: INDIA
               </p>
             </div>
           </div>
