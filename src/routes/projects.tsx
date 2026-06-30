@@ -56,16 +56,16 @@ const PROJECTS: Project[] = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
   },
   {
-    node: "NODE_03 // EXPLOIT",
-    category: "EXPLOIT",
+    node: "NODE_03 // CODE",
+    category: "CODE",
     accent: "secondary",
-    title: "TV STREAMER // EXPLOIT",
-    badge: "[ STATUS: PROTOTYPE ]",
+    title: "TV STREAMER // CODE",
+    badge: "[ STATUS: IN_PROGRESS ]",
     description:
-      "> READY FOR DETECTION AND TRACKING... Custom Aruduino UNO system for real-time object detection using ultrasonic sensor and servo motor. Features capture, tracking and alerting of objects on-the-run.",
-    tags: ["C++", "Arduino-UNO", "Python", "Pygame"],
-    cta: "VIEW_POC",
-    link:"https://github.com/6cloudguy/radariot",
+      "> READY TO INTERUPT AND PLAY ANYHTING... Script to utilise a loophole in Sony Bravia systems to use them as an external sound system/media player. Utilises a default running UPnP DLNA 1.0 service in them. Works on some systems.",
+    tags: ["Python", "Bash", "UPnP", "PoC"],
+    cta: "VIEW_CODE",
+    link:"https://github.com/6cloudguy/tvstreamer",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
   },
@@ -180,10 +180,11 @@ function ProjectsPage() {
       <div className="border border-outline-variant bg-black p-6 font-code-sm text-primary-fixed mb-4 max-w-2xl">
         <div className="mb-2">root@sentinel-os:~/projects$ ls -la</div>
         <div className="opacity-80 flex flex-col gap-1">
-          <div>drwxr-xr-x  2 root root  4096 Oct 24 14:32 .</div>
-          <div>drwxr-xr-x 15 root root  4096 Oct 20 09:15 ..</div>
-          <div>-rw-r--r--  1 root root  2048 Oct 22 18:00 osint_scraper.py</div>
-          <div>-rw-r--r--  1 root root 10240 Oct 21 11:24 wifi_payload.bin</div>
+          <div>drwxr-xr-x  2 root root  4096 Jul 24 14:32 .</div>
+          <div>drwxr-xr-x 15 root root  4096 Jul 20 09:15 ..</div>
+          <div>-rw-r--r--  1 root root  2048 Jul 22 18:00 autofn.sh</div>
+          <div>-rw-r--r--  1 root root  1024 Nov 21 11:24 tv-speaker.sh</div>
+          <div>-rw-r--r--  1 root root 10240 Sep 21 01:45 radar.py</div>
         </div>
         <div className="mt-4">
           root@sentinel-os:~/projects${" "}

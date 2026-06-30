@@ -41,7 +41,7 @@ function ContactPage() {
         {/* Channels Console */}
         <div className="bg-black border border-outline-variant p-8 shadow-[0_0_40px_rgba(42,229,0,0.05)]">
           <p className="text-outline font-code-sm mb-8 leading-relaxed">
-            &gt; DIRECT CHANNELS OF COMMUNICATION ESTABLISHED. SELECT AN UPLINK NODE BELOW TO ROUTE YOUR CURRENT SESSION TO THE TARGET SECURE PROTOCOL.
+            &gt; DIRECT CHANNELS OF COMMUNICATION, SELECT A METHOD BELOW TO CONNECT YOUR SESSION TO ME.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -49,28 +49,28 @@ function ContactPage() {
               icon="hub"
               label="GITHUB // SOURCE_CONTROL"
               subText="Inspect public repositories, hardware payloads, and OSINT scripts."
-              href="https://github.com"
+              href="https://github.com/6cloudguy"
               accent="primary"
             />
             <SocialButton
               icon="lan"
               label="LINKEDIN // PROFESSIONAL_NET"
               subText="Connect for contract work, security consulting, and research reviews."
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/pranavp2006"
               accent="secondary"
             />
             <SocialButton
               icon="terminal"
               label="HACKTHEBOX // LABS"
               subText="View active penetration testing labs, CTF scores, and rank details."
-              href="https://hackthebox.com"
+              href="https://app.hackthebox.com/users/2357341"
               accent="secondary"
             />
             <SocialButton
               icon="mail"
               label="EMAIL // DIRECT_INBOX"
               subText="Direct secure uplink to request encryption keys or submit inquiries."
-              href="mailto:contact@sentinel-os.org"
+              href="mailto:6cloudguy@proton.me"
               accent="primary"
             />
           </div>
