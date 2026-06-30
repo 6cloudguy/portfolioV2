@@ -113,7 +113,7 @@ const ENTRIES = [
     title: "ME AND MY GIRLFRIEND 1",
     excerpt:
       "A writeup on how I hacked the VulnHub box Me And My Girlfriend.",
-    tags: ["VulnHub","LINUX","LABS", "EASY"],
+    tags: ["VULNHUB","LINUX","LABS", "EASY"],
     image:
       "../../assets/vuln.webp",
     overlay: "bg-primary-fixed/10",

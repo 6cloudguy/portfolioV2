@@ -56,18 +56,18 @@ const PROJECTS: Project[] = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
   },
   {
-    node: "NODE_03 // CODE",
-    category: "CODE",
+    node: "NODE_03 // SCRIPT",
+    category: "SCRIPT",
     accent: "secondary",
-    title: "TV STREAMER // CODE",
+    title: "TV STREAMER // SCRIPT",
     badge: "[ STATUS: IN_PROGRESS ]",
     description:
       "> READY TO INTERUPT AND PLAY ANYHTING... Script to utilise a loophole in Sony Bravia systems to use them as an external sound system/media player. Utilises a default running UPnP DLNA 1.0 service in them. Works on some systems.",
     tags: ["Python", "Bash", "UPnP", "PoC"],
-    cta: "VIEW_CODE",
+    cta: "VIEW_SCRIPT",
     link:"https://github.com/6cloudguy/tvstreamer",
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDcPcKPpd1puFSsqNVVy3AiNrbdTqFiPyObMdA8-lCpSOQUTgYaYJr9SIKiPby3gJ2pDd1VGKdO3D_Xs9aEgeWWJCIQb9UcJZ6VHYQcv8MpcDRY1q2DBpjcD6dkMQ3pIsJ1SRi-XQt-alECsXckxId72ChC-AAXN0NDyyLLdF28IZA2Ik4IDFfk6gep6EAUR1N80QSdUOyWV_I3yPXpeu6VjaIR1fk9syHMtkGzZTfPRiJxXYzYHSGP-PI3Pmp3DN-BEjegz_6XMuZP",
+      "../../assets/pcs.png",
   },
 ];
 
@@ -77,7 +77,7 @@ function ProjectsPage() {
       <section className="mb-12 border-l-2 border-primary-fixed pl-6">
         <div className="flex items-center gap-2 text-primary-fixed mb-2">
           <span className="material-symbols-outlined text-sm">directory_sync</span>
-          <span className="font-code-sm">ROOT/REPOS/SENTINEL/PROJECTS</span>
+          <span className="font-code-sm">ROOT/REPOS/PROJECTS</span>
         </div>
         <h1 className="font-headline-lg-mobile md:font-headline-lg text-on-surface mb-4">
           PROJECT_FILES
@@ -178,7 +178,7 @@ function ProjectsPage() {
 
       {/* Terminal listing */}
       <div className="border border-outline-variant bg-black p-6 font-code-sm text-primary-fixed mb-4 max-w-2xl">
-        <div className="mb-2">root@sentinel-os:~/projects$ ls -la</div>
+        <div className="mb-2">root@parrot:~/projects$ ls -la</div>
         <div className="opacity-80 flex flex-col gap-1">
           <div>drwxr-xr-x  2 root root  4096 Jul 24 14:32 .</div>
           <div>drwxr-xr-x 15 root root  4096 Jul 20 09:15 ..</div>
@@ -187,7 +187,7 @@ function ProjectsPage() {
           <div>-rw-r--r--  1 root root 10240 Sep 21 01:45 radar.py</div>
         </div>
         <div className="mt-4">
-          root@sentinel-os:~/projects${" "}
+          root@parrot:~/projects${" "}
           <span className="inline-block w-2 h-4 bg-primary-fixed align-middle animate-pulse" />
         </div>
       </div>

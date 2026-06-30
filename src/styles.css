@@ -154,9 +154,6 @@
     z-index: 100;
     pointer-events: none;
   }
-  .glitch-text:hover {
-    animation: glitch 0.5s infinite;
-  }
   .animate-flicker { animation: flicker 0.15s infinite; }
 }
 
@@ -166,13 +163,6 @@
   15% { opacity: 1; }
   70% { opacity: 0.9; }
   80% { opacity: 1; }
-}
-@keyframes glitch {
-  0% { transform: translate(0); text-shadow: -1px 0 #39FF14, 1px 0 #00f1fd; }
-  25% { transform: translate(-1px, 0px); }
-  50% { transform: translate(1px, 0px); text-shadow: 1px 0 #39FF14, -1px 0 #00f1fd; }
-  75% { transform: translate(-1px, 0px); }
-  100% { transform: translate(0); }
 }
 @keyframes scanline {
   0% { transform: translateY(-100%); }
