@@ -16,7 +16,6 @@ export const Route = createFileRoute("/blog")({
 
 const ENTRIES = [
   {
-    id: "#00102",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
@@ -31,7 +30,6 @@ const ENTRIES = [
     link:"",
   },
   {
-    id: "#00112",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2025.12.06 // 13:16 GMT",
@@ -46,7 +44,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/interpreter/",
   },
   {
-    id: "#00103",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
@@ -61,7 +58,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/strutted/",
   },
   {
-    id: "#00104",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2026.5.12 // 04:22 GMT",
@@ -76,7 +72,6 @@ const ENTRIES = [
     link:"https://medium.com/@6cloudguy/htb-soulmate-796e854e097b",
   },
   {
-    id: "#00139",
     severity: "NOTES",
     severityColor: "border-bluish text-bluish",
     timestamp: "T-MINUS: 2025.08.03 // 11:15 GMT",
@@ -91,7 +86,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/filetransfer/",
   },
   {
-    id: "#00106",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2025.10.1 // 09:16 GMT",
@@ -106,7 +100,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/artificial/",
   },
   {
-    id: "#00110",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2025.11.16 // 03:28 GMT",
@@ -121,7 +114,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/meandmygf1/",
   },
   {
-    id: "#00112",
     severity: "WRITEUP",
     severityColor: "border-redish text-redish",
     timestamp: "T-MINUS: 2025.12.06 // 13:16 GMT",
@@ -136,7 +128,6 @@ const ENTRIES = [
     link:"https://6cloudguy.github.io/posts/editor/",
   },
   {
-    id: "#00134",
     severity: "INFO",
     severityColor: "border-grey text-grey",
     timestamp: "T-MINUS: 2023.09.05 // 22:50 GMT",
@@ -150,7 +141,7 @@ const ENTRIES = [
     accent: "text-primary-fixed",
     link:"https://6cloudguy.github.io/posts/jsdeobfuscation/",
   },
-];
+].map((e, i) => ({ ...e, id: `#${String(i + 100).padStart(5, "0")}` }));
 
 const tagCounts = ENTRIES.flatMap((e) => e.tags).reduce(
   (acc, tag) => {
@@ -215,7 +206,7 @@ function BlogPage() {
           ) : (
             filteredEntries.map((e) => (
               <article
-                key={e.id}
+                key={e.title}
                 className="relative group border border-outline-variant bg-surface-container-low hover:bg-surface-container transition-all overflow-hidden"
               >
                 <div className="flex flex-col md:flex-row">
