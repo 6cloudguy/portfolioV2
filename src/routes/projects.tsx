@@ -31,7 +31,7 @@ const PROJECTS: Project[] = [
     node: "NODE_01 // SCRIPT",
     category: "SCRIPT",
     accent: "primary",
-    title: "AUTOFN",
+    title: "AUTOFN // SCRIPT",
     badge: "[ FOCUS: RECON ]",
     description:
       "> INITIALIZING DATA HARVEST... Automated reconnaissance engine designed for Bug Bounty Hunting. Uses multiple reconaissance tools to form easily and smartly identify entrypoints and scanning automation.",
@@ -39,13 +39,13 @@ const PROJECTS: Project[] = [
     cta: "VIEW_SOURCE_CODE",
     link:"https://github.com/6cloudguy/autofn",
     image:
-      "/assets/server.png",
+      "/assets/autofn.png",
   },
   {
     node: "NODE_02 // HARDWARE",
     category: "HARDWARE",
     accent: "secondary",
-    title: "RADAR SYSTEM : Internship Project",
+    title: "RADAR SYSTEM // INTERNSHIP PROJECT",
     badge: "[ STATUS: PROTOTYPE ]",
     description:
       "> READY FOR DETECTION AND TRACKING... Custom Aruduino UNO system for real-time object detection using ultrasonic sensor and servo motor. Features capture, tracking and alerting of objects on-the-run.",
@@ -53,12 +53,26 @@ const PROJECTS: Project[] = [
     cta: "VIEW_DOCUMENTATION",
     link:"https://github.com/6cloudguy/radariot",
     image:
-      "/assets/chip.png",
+      "/assets/IOT.png",
   },
   {
-    node: "NODE_03 // SCRIPT",
-    category: "SCRIPT",
+    node: "NODE_03 // CHALLENGE",
+    category: "CHALLENGE",
     accent: "secondary",
+    title: "CHAOGEN // HTB CHALLENGE",
+    badge: "[ STATUS: ACTIVE ]",
+    description:
+      "> READY TO CHALLENGE ANYONE WHO DARES... HTB challenge [coding] that I created and got published. Based on Conway's Game Of Life and a complex mordern cell automaton",
+    tags: ["HTB", "CHALLENGE", "HARD","CODING"],
+    cta: "CHALLENGE_ME",
+    link:"http://app.hackthebox.com/challenges/Chaogen",
+    image:
+      "/assets/coding.png",
+  },
+  {
+    node: "NODE_04 // SCRIPT",
+    category: "SCRIPT",
+    accent: "primary",
     title: "TV STREAMER // SCRIPT",
     badge: "[ STATUS: IN_PROGRESS ]",
     description:

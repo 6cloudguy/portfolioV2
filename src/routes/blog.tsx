@@ -22,12 +22,12 @@ const ENTRIES = [
     title: "MEDIA HIJACK: NMAP TO HIJACKING TV",
     excerpt:
       "A writeup on how I started with an nmap on my Sony Bravia TV and ended up with a full media hijacking and DoS probabilities in a couple of minutes.",
-    tags: ["COMINGSOON","BUG", "IOT"],
+    tags: ["BUG", "IOT"],
     image:
       "/assets/pcs.png",
     overlay: "bg-primary-fixed/10",
     accent: "text-primary-fixed",
-    link:"",
+    link:"https://medium.com/@6cloudguy/unauthenticated-media-control-on-sony-bravia-7cd46e3c007e",
   },
   {
     severity: "WRITEUP",
