@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
@@ -171,10 +171,40 @@ function HomePage() {
 
   return (
     <SiteLayout>
-      {/* ── HERO TERMINAL ── */}
-      <section className="flex items-center justify-center min-h-[70vh] mb-20" id="home">
-        <div className="w-full max-w-3xl terminal-glow bg-black/80 rounded-lg overflow-hidden flex flex-col">
 
+      {/* ── HERO ── */}
+      <section className="mb-20" id="home">
+        {/* Bold header block — same pattern as blog/projects/contact */}
+        <div className="mb-10 border-l-4 border-primary-fixed pl-6">
+          <div className="flex items-center gap-4 mb-2">
+            <span className="text-primary-fixed font-code-sm animate-pulse">[ SYSTEM_STATUS: OPERATIONAL ]</span>
+            <div className="h-px flex-1 bg-outline-variant" />
+          </div>
+          <h1 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
+            PRANAV P
+            <span className="inline-block w-3 h-7 bg-primary-fixed align-middle ml-3 animate-pulse" />
+          </h1>
+          <p className="text-outline font-body-md mt-2 max-w-2xl">
+            CS student &amp; offensive security enthusiast — breaking things legally. CTFs, red team tooling, and IoT research.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            <Link
+              to="/projects"
+              className="border border-primary-fixed text-primary-fixed px-5 py-2 font-code-sm text-xs uppercase tracking-widest hover:bg-primary-fixed/10 hover:shadow-[0_0_15px_rgba(57,255,20,0.3)] transition-all active:scale-95"
+            >
+              [ VIEW_PROJECTS ]
+            </Link>
+            <Link
+              to="/blog"
+              className="border border-outline-variant text-outline-variant px-5 py-2 font-code-sm text-xs uppercase tracking-widest hover:border-secondary-fixed hover:text-secondary-fixed transition-all active:scale-95"
+            >
+              [ READ_LOGS ]
+            </Link>
+          </div>
+        </div>
+
+        {/* Terminal */}
+        <div className="w-full max-w-3xl terminal-glow bg-black/80 rounded-lg overflow-hidden flex flex-col">
           {/* Title bar */}
           <div className="terminal-header-bar px-4 py-2 flex items-center justify-between">
             <div className="flex gap-2">
@@ -189,7 +219,7 @@ function HomePage() {
           </div>
 
           {/* Terminal body */}
-          <div className="p-6 font-code-sm min-h-[360px] flex flex-col gap-[2px]">
+          <div className="p-6 font-code-sm min-h-[320px] flex flex-col gap-[2px]">
             {lines.map((line, i) => {
               if (line.kind === "gap") return <div key={i} className="h-2" />;
               if (line.kind === "out") {
@@ -210,7 +240,6 @@ function HomePage() {
                 </div>
               );
             })}
-            {/* Idle cursor after sequence finishes */}
             {typing === null && lines.length > 0 && (
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-secondary-fixed select-none">root@parrot:~$</span>
@@ -221,13 +250,34 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ── STATS ROW ── */}
+      <section className="mb-20" id="stats">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {STATS.map((s) => (
+            <div
+              key={s.label}
+              className="bg-surface-container-lowest border border-outline-variant p-5 flex flex-col items-center justify-center text-center group hover:border-primary-fixed transition-colors"
+            >
+              <span className="font-headline-lg text-primary-fixed group-hover:drop-shadow-[0_0_10px_#39FF14] transition-all">
+                {s.value}
+              </span>
+              <span className="font-code-sm text-secondary-fixed text-xs mt-1">{s.unit}</span>
+              <span className="font-label-caps text-outline text-[9px] mt-2">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── PROFILE / WHOAMI ── */}
       <section className="mb-20 scroll-mt-24" id="system">
-        <div className="flex items-center gap-4 mb-8">
-          <h1 className="font-headline-lg-mobile md:font-headline-lg text-primary-fixed glitch-text uppercase">
+        <div className="mb-8 border-l-4 border-primary-fixed pl-6">
+          <div className="flex items-center gap-4 mb-1">
+            <span className="text-primary-fixed font-code-sm">[ PROFILE_DATA ]</span>
+            <div className="h-px flex-1 bg-outline-variant" />
+          </div>
+          <h2 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
             WHO AM I
-          </h1>
-          <div className="h-px flex-1 bg-outline-variant/30" />
+          </h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -237,7 +287,6 @@ function HomePage() {
               ID: 6cloudguy
             </div>
             <div>
-              <p className="text-primary-fixed font-headline-md mb-4">&gt; PROFILE_DATA</p>
               <p className="text-on-surface mb-6 leading-relaxed font-body-md text-sm">
                 3rd year CS student obsessed with breaking things — the legal way. I got into
                 security through CTFs and haven't looked back since. Currently building up my
@@ -289,32 +338,18 @@ function HomePage() {
         </div>
       </section>
 
-      {/* ── STATS ROW ── */}
-      <section className="mb-20" id="stats">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {STATS.map((s) => (
-            <div
-              key={s.label}
-              className="bg-surface-container-lowest border border-outline-variant p-5 flex flex-col items-center justify-center text-center group hover:border-primary-fixed transition-colors"
-            >
-              <span className="font-headline-lg text-primary-fixed group-hover:drop-shadow-[0_0_10px_#39FF14] transition-all">
-                {s.value}
-              </span>
-              <span className="font-code-sm text-secondary-fixed text-xs mt-1">{s.unit}</span>
-              <span className="font-label-caps text-outline text-[9px] mt-2">{s.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* ── SKILLS / ARSENAL ── */}
       <section className="mb-20 scroll-mt-24" id="arsenal">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="font-headline-lg-mobile md:font-headline-md text-primary-fixed glitch-text uppercase">
+        <div className="mb-8 border-l-4 border-secondary-fixed pl-6">
+          <div className="flex items-center gap-4 mb-1">
+            <span className="text-secondary-fixed font-code-sm">TOOLS_LOADED: {SKILLS.reduce((a, s) => a + s.items.length, 0)}</span>
+            <div className="h-px flex-1 bg-outline-variant" />
+          </div>
+          <h2 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
             ARSENAL
           </h2>
-          <div className="h-px flex-1 bg-outline-variant/30" />
-          <span className="font-code-sm text-outline-variant text-[10px]">TOOLS_LOADED: {SKILLS.reduce((a, s) => a + s.items.length, 0)}</span>
         </div>
 
         {/* Terminal-style skill dump */}
@@ -351,12 +386,14 @@ function HomePage() {
 
       {/* ── CERTIFICATIONS ── */}
       <section className="mb-20 scroll-mt-24" id="certs">
-        <div className="flex items-center gap-4 mb-8">
-          <h2 className="font-headline-lg-mobile md:font-headline-md text-primary-fixed glitch-text uppercase">
+        <div className="mb-8 border-l-4 border-tertiary-fixed-dim pl-6">
+          <div className="flex items-center gap-4 mb-1">
+            <span className="text-tertiary-fixed-dim font-code-sm">CLEARANCE REQUIRED</span>
+            <div className="h-px flex-1 bg-outline-variant" />
+          </div>
+          <h2 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
             CREDENTIALS
           </h2>
-          <div className="h-px flex-1 bg-outline-variant/30" />
-          <span className="font-code-sm text-outline-variant text-[10px]">CLEARANCE REQUIRED</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
