@@ -32,31 +32,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-// ── Terminal sequence definition ──────────────────────────────────────────
-// Each entry is either a command (types out char-by-char) or output (appears
-// as a block after the command finishes).
-type TermLine =
-  | { kind: "cmd"; text: string }
-  | { kind: "out"; text: string; color?: string }
-  | { kind: "gap" };
-
-const SEQUENCE: TermLine[] = [
-  { kind: "out", text: "[OK] SSH handshake complete ", color: "text-outline-variant" },
-  { kind: "gap" },
-  { kind: "cmd", text: "whoami" },
-  { kind: "out", text: "pranav p" },
-  { kind: "gap" },
-  { kind: "cmd", text: "cat about.txt" },
-  { kind: "out", text: "Role    :  CS Student (Year 3)  //  Sec Enthusiast" },
-  { kind: "out", text: "Focus   :  Offensive Security, CTFs, IoT Hacking" },
-  { kind: "out", text: "Location    :  India" },
-  { kind: "out", text: "Status  :  ● ONLINE", color: "text-primary-fixed" },
-  { kind: "gap" },
-  { kind: "cmd", text: "ls certs/" },
-  { kind: "out", text: "ICCA.cert    eJPT.cert  [IN_PROGRESS]", color: "text-secondary-fixed" },
-  { kind: "gap" },
-];
-
 const SKILLS = [
   { cat: "WEB", items: ["Burp Suite", "SQLMap", "FFUF", "Nuclei", "Gobuster"] },
   { cat: "NETWORK", items: ["Nmap", "Wireshark", "Metasploit", "Netcat"] },
@@ -104,44 +79,16 @@ const STATS = [
 ];
 
 const OPERATOR_CHIPS = [
-  { label: "OPERATOR_01", color: "text-primary-fixed border-primary-fixed/50" },
-  { label: "CS Y3", color: "text-secondary-fixed border-secondary-fixed/50" },
+  { label: "RED TEAM", color: "text-primary-fixed border-primary-fixed/50" },
+  // { label: "", color: "text-secondary-fixed border-secondary-fixed/50" },
   { label: "INDIA", color: "text-tertiary-fixed-dim border-tertiary-fixed-dim/50" },
   { label: "HTB", color: "text-primary-fixed border-primary-fixed/50" },
-  { label: "SEC_ENTHUSIAST", color: "text-outline-variant border-outline-variant/50" },
-];
-
-// Rendered terminal line — either a fully-typed command or a static output block
-type RenderedLine =
-  | { kind: "cmd"; text: string; done: boolean }   // done = finished typing
-  | { kind: "out"; text: string; color?: string }
-  | { kind: "gap" };
-
-// ── Boot flash hook ───────────────────────────────────────────────────────
-const BOOT_LINES = [
-  "INITIALIZING OPERATOR PROFILE...",
-  "DECRYPTING CREDENTIALS...",
-  "ACCESS GRANTED",
+  { label: "SECURITY_ENTHUSIAST", color: "text-secondary-fixed border-secondary-fixed/50" },
 ];
 
 function HomePage() {
-  const [bootDone, setBootDone] = useState(false);
-  const [bootIdx, setBootIdx] = useState(0);
   const statsRef = useRef<HTMLElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
-  const [lines, setLines] = useState<RenderedLine[]>([]);
-  const [typing, setTyping] = useState<{ seqIdx: number; charIdx: number } | null>(null);
-
-  // Boot sequence
-  useEffect(() => {
-    if (bootIdx < BOOT_LINES.length - 1) {
-      const t = setTimeout(() => setBootIdx((i) => i + 1), 400);
-      return () => clearTimeout(t);
-    } else {
-      const t = setTimeout(() => setBootDone(true), 600);
-      return () => clearTimeout(t);
-    }
-  }, [bootIdx]);
 
   // Stats intersection observer
   useEffect(() => {
@@ -155,80 +102,6 @@ function HomePage() {
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
-    // Kick off: skip any leading out/gap entries immediately, find first cmd
-    let seqIdx = 0;
-    const initial: RenderedLine[] = [];
-
-    // Flush leading non-cmd lines instantly
-    while (seqIdx < SEQUENCE.length && SEQUENCE[seqIdx].kind !== "cmd") {
-      const s = SEQUENCE[seqIdx];
-      if (s.kind === "out") initial.push({ kind: "out", text: s.text, color: s.color });
-      else initial.push({ kind: "gap" });
-      seqIdx++;
-    }
-
-    if (seqIdx < SEQUENCE.length) {
-      // Start typing the first cmd after a short pause
-      initial.push({ kind: "cmd", text: "", done: false });
-      setLines(initial);
-      const t = setTimeout(() => setTyping({ seqIdx, charIdx: 0 }), 600);
-      return () => clearTimeout(t);
-    } else {
-      setLines(initial);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typing === null) return;
-    const { seqIdx, charIdx } = typing;
-    const seq = SEQUENCE[seqIdx];
-    if (seq.kind !== "cmd") return;
-
-    if (charIdx < seq.text.length) {
-      // Type next character
-      const t = setTimeout(() => {
-        setLines((prev) => {
-          const next = [...prev];
-          next[next.length - 1] = { kind: "cmd", text: seq.text.slice(0, charIdx + 1), done: false };
-          return next;
-        });
-        setTyping({ seqIdx, charIdx: charIdx + 1 });
-      }, 60 + Math.random() * 60);
-      return () => clearTimeout(t);
-    } else {
-      // Command fully typed — mark done, then flush following out/gap until next cmd
-      const t = setTimeout(() => {
-        setLines((prev) => {
-          const next = [...prev];
-          next[next.length - 1] = { kind: "cmd", text: seq.text, done: true };
-          return next;
-        });
-
-        // Walk forward, collect out/gap, then start next cmd
-        let nextIdx = seqIdx + 1;
-        const toAppend: RenderedLine[] = [];
-        while (nextIdx < SEQUENCE.length && SEQUENCE[nextIdx].kind !== "cmd") {
-          const s = SEQUENCE[nextIdx];
-          if (s.kind === "out") toAppend.push({ kind: "out", text: s.text, color: s.color });
-          else toAppend.push({ kind: "gap" });
-          nextIdx++;
-        }
-
-        setTimeout(() => {
-          if (nextIdx < SEQUENCE.length) {
-            setLines((prev) => [...prev, ...toAppend, { kind: "cmd", text: "", done: false }]);
-            setTyping({ seqIdx: nextIdx, charIdx: 0 });
-          } else {
-            setLines((prev) => [...prev, ...toAppend]);
-            setTyping(null);
-          }
-        }, 300);
-      }, 120);
-      return () => clearTimeout(t);
-    }
-  }, [typing]);
-
   return (
     <SiteLayout>
 
@@ -236,23 +109,6 @@ function HomePage() {
       <section className="mb-20" id="home">
         {/* Bold header block */}
         <div className="mb-10 border-l-4 border-primary-fixed pl-6">
-          {/* Boot sequence line */}
-          <div className="flex items-center gap-3 mb-3">
-            <span className={`font-code-sm text-[11px] transition-colors duration-300 ${
-              bootDone ? "text-primary-fixed" : "text-outline-variant"
-            }`}>
-              {bootDone ? "[ ACCESS GRANTED ]" : `[ ${BOOT_LINES[bootIdx]}... ]`}
-            </span>
-            {!bootDone && <span className="inline-block w-1.5 h-3 bg-outline-variant animate-pulse" />}
-            {bootDone && (
-              <span className="flex gap-1 ml-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" />
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" style={{ animationDelay: "0.2s" }} />
-                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" style={{ animationDelay: "0.4s" }} />
-              </span>
-            )}
-          </div>
-
           {/* Name */}
           <h1
             className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter glitch-text mb-1"
@@ -285,69 +141,6 @@ function HomePage() {
               <span className="relative z-10">[ VIEW_PROJECTS ]</span>
             </Link>
           </div>
-        </div>
-
-        {/* Decorative separator */}
-        <div className="flex items-center gap-3 mb-6 pl-0">
-          <span className="font-code-sm text-[10px] text-outline-variant/60">──</span>
-          <span className="font-code-sm text-[10px] text-outline-variant/50 tracking-widest">LIVE_SESSION // SRC: 0.0.0.0 // DST: OPERATOR_01</span>
-          <div className="h-px flex-1 bg-outline-variant/20" />
-          <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse" />
-        </div>
-
-        {/* Terminal */}
-        <div className="w-full max-w-3xl terminal-glow bg-black/80 rounded-lg overflow-hidden flex flex-col corner-frame">
-          {/* Title bar */}
-          <div className="terminal-header-bar px-4 py-2 flex items-center justify-between">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-error/50" />
-              <div className="w-3 h-3 rounded-full bg-secondary-fixed/50" />
-              <div className="w-3 h-3 rounded-full bg-primary-fixed/50" />
-            </div>
-            <span className="font-code-sm text-outline-variant uppercase text-[10px] tracking-widest">
-              root@parrot  —  bash  —  80×24
-            </span>
-            <span className="material-symbols-outlined text-outline-variant text-sm">close</span>
-          </div>
-
-          {/* Terminal body */}
-          <div className="p-6 font-code-sm min-h-[320px] flex flex-col gap-[2px]">
-            {lines.map((line, i) => {
-              if (line.kind === "gap") return <div key={i} className="h-2" />;
-              if (line.kind === "out") {
-                return (
-                  <p key={i} className={line.color ?? "text-on-surface-variant"}>
-                    {line.text}
-                  </p>
-                );
-              }
-              // cmd line
-              return (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="text-secondary-fixed select-none">root@parrot:~$</span>
-                  <span className="text-primary-fixed">{line.text}</span>
-                  {!line.done && (
-                    <span className="w-[7px] h-[15px] bg-primary-fixed animate-pulse inline-block" />
-                  )}
-                </div>
-              );
-            })}
-            {typing === null && lines.length > 0 && (
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-secondary-fixed select-none">root@parrot:~$</span>
-                <span className="w-[7px] h-[15px] bg-primary-fixed animate-pulse inline-block" />
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATS ROW ── */}
-      <section className="mb-20" id="stats" ref={statsRef}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {STATS.map((s) => (
-            <StatCard key={s.label} stat={s} triggered={statsVisible} />
-          ))}
         </div>
       </section>
 
@@ -421,6 +214,15 @@ function HomePage() {
         </div>
       </section>
 
+
+      {/* ── STATS ROW ── */}
+            <section className="mb-20" id="stats" ref={statsRef}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {STATS.map((s) => (
+                  <StatCard key={s.label} stat={s} triggered={statsVisible} />
+                ))}
+              </div>
+            </section>
 
 
       {/* ── SKILLS / ARSENAL ── */}
