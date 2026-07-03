@@ -155,6 +155,60 @@
     pointer-events: none;
   }
   .animate-flicker { animation: flicker 0.15s infinite; }
+
+  /* Real glitch animation — color channel split on the name */
+  .glitch-text {
+    position: relative;
+    animation: glitch-shake 7s infinite;
+  }
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-glitch);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .glitch-text::before {
+    color: #6ff6ff;
+    animation: glitch-clip-top 7s infinite;
+    opacity: 0;
+  }
+  .glitch-text::after {
+    color: #ff6b6b;
+    animation: glitch-clip-bot 7s infinite;
+    opacity: 0;
+  }
+
+  /* Corner bracket decoration */
+  .corner-frame {
+    position: relative;
+  }
+  .corner-frame::before,
+  .corner-frame::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: rgba(57, 255, 20, 0.5);
+    border-style: solid;
+    pointer-events: none;
+    transition: border-color 0.3s;
+  }
+  .corner-frame::before {
+    top: -1px; left: -1px;
+    border-width: 2px 0 0 2px;
+  }
+  .corner-frame::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 2px 2px 0;
+  }
+  .corner-frame:hover::before,
+  .corner-frame:hover::after {
+    border-color: rgba(57, 255, 20, 1);
+  }
 }
 
 @keyframes flicker {
@@ -163,6 +217,46 @@
   15% { opacity: 1; }
   70% { opacity: 0.9; }
   80% { opacity: 1; }
+}
+
+@keyframes glitch-shake {
+  0%, 88%, 100% { transform: none; }
+  89%   { transform: skewX(-3deg) translateX(-2px); }
+  90%   { transform: skewX(3deg)  translateX(2px); }
+  91%   { transform: skewX(-1deg) translateX(-1px); }
+  92%   { transform: none; }
+  93%   { transform: skewX(1deg); }
+  94%   { transform: none; }
+}
+
+@keyframes glitch-clip-top {
+  0%, 88%, 100% { opacity: 0; clip-path: none; transform: none; }
+  89% {
+    opacity: 1;
+    clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%);
+    transform: translateX(-3px);
+  }
+  90% {
+    opacity: 1;
+    clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%);
+    transform: translateX(3px);
+  }
+  91% { opacity: 0; clip-path: none; transform: none; }
+}
+
+@keyframes glitch-clip-bot {
+  0%, 89%, 100% { opacity: 0; clip-path: none; transform: none; }
+  90% {
+    opacity: 1;
+    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    transform: translateX(4px);
+  }
+  91% {
+    opacity: 1;
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+    transform: translateX(-4px);
+  }
+  92% { opacity: 0; clip-path: none; transform: none; }
 }
 @keyframes scanline {
   0% { transform: translateY(-100%); }

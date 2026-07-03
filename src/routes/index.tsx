@@ -1,6 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
+
+// ── Count-up hook ─────────────────────────────────────────────────────────
+function useCountUp(target: number, duration = 1400, triggered = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!triggered) return;
+    let start: number | null = null;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      setCount(Math.floor(ease * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration, triggered]);
+  return count;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,10 +97,18 @@ const CERTIFICATIONS: Cert[] = [
 ];
 
 const STATS = [
-  { label: "YEAR_OF_STUDY", value: "3rd", unit: "YEAR" },
-  { label: "CERTS_EARNED", value: "1", unit: "CERT" },
-  { label: "CTF_PLATFORMS", value: "2+", unit: "ACTIVE" },
-  { label: "BOXES_PWNED", value: "30+", unit: "BOXES" },
+  { label: "YEAR_OF_STUDY", display: "3rd", num: 3,  unit: "YEAR",   suffix: "" },
+  { label: "CERTS_EARNED",  display: "1",   num: 1,  unit: "CERT",   suffix: "" },
+  { label: "CTF_PLATFORMS", display: "2+",  num: 2,  unit: "ACTIVE", suffix: "+" },
+  { label: "BOXES_PWNED",   display: "30+", num: 30, unit: "BOXES",  suffix: "+" },
+];
+
+const OPERATOR_CHIPS = [
+  { label: "OPERATOR_01", color: "text-primary-fixed border-primary-fixed/50" },
+  { label: "CS Y3", color: "text-secondary-fixed border-secondary-fixed/50" },
+  { label: "INDIA", color: "text-tertiary-fixed-dim border-tertiary-fixed-dim/50" },
+  { label: "HTB", color: "text-primary-fixed border-primary-fixed/50" },
+  { label: "SEC_ENTHUSIAST", color: "text-outline-variant border-outline-variant/50" },
 ];
 
 // Rendered terminal line — either a fully-typed command or a static output block
@@ -91,9 +117,43 @@ type RenderedLine =
   | { kind: "out"; text: string; color?: string }
   | { kind: "gap" };
 
+// ── Boot flash hook ───────────────────────────────────────────────────────
+const BOOT_LINES = [
+  "INITIALIZING OPERATOR PROFILE...",
+  "DECRYPTING CREDENTIALS...",
+  "ACCESS GRANTED",
+];
+
 function HomePage() {
+  const [bootDone, setBootDone] = useState(false);
+  const [bootIdx, setBootIdx] = useState(0);
+  const statsRef = useRef<HTMLElement>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
   const [lines, setLines] = useState<RenderedLine[]>([]);
   const [typing, setTyping] = useState<{ seqIdx: number; charIdx: number } | null>(null);
+
+  // Boot sequence
+  useEffect(() => {
+    if (bootIdx < BOOT_LINES.length - 1) {
+      const t = setTimeout(() => setBootIdx((i) => i + 1), 400);
+      return () => clearTimeout(t);
+    } else {
+      const t = setTimeout(() => setBootDone(true), 600);
+      return () => clearTimeout(t);
+    }
+  }, [bootIdx]);
+
+  // Stats intersection observer
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   useEffect(() => {
     // Kick off: skip any leading out/gap entries immediately, find first cmd
@@ -174,37 +234,69 @@ function HomePage() {
 
       {/* ── HERO ── */}
       <section className="mb-20" id="home">
-        {/* Bold header block — same pattern as blog/projects/contact */}
+        {/* Bold header block */}
         <div className="mb-10 border-l-4 border-primary-fixed pl-6">
-          <div className="flex items-center gap-4 mb-2">
-            <span className="text-primary-fixed font-code-sm animate-pulse">[ SYSTEM_STATUS: OPERATIONAL ]</span>
-            <div className="h-px flex-1 bg-outline-variant" />
+          {/* Boot sequence line */}
+          <div className="flex items-center gap-3 mb-3">
+            <span className={`font-code-sm text-[11px] transition-colors duration-300 ${
+              bootDone ? "text-primary-fixed" : "text-outline-variant"
+            }`}>
+              {bootDone ? "[ ACCESS GRANTED ]" : `[ ${BOOT_LINES[bootIdx]}... ]`}
+            </span>
+            {!bootDone && <span className="inline-block w-1.5 h-3 bg-outline-variant animate-pulse" />}
+            {bootDone && (
+              <span className="flex gap-1 ml-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" style={{ animationDelay: "0.2s" }} />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse" style={{ animationDelay: "0.4s" }} />
+              </span>
+            )}
           </div>
-          <h1 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
+
+          {/* Name */}
+          <h1
+            className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter glitch-text mb-1"
+            data-glitch="PRANAV P"
+          >
             PRANAV P
             <span className="inline-block w-3 h-7 bg-primary-fixed align-middle ml-3 animate-pulse" />
           </h1>
-          <p className="text-outline font-body-md mt-2 max-w-2xl">
+
+          {/* Identity chips */}
+          <div className="flex flex-wrap gap-2 mt-3 mb-4">
+            {OPERATOR_CHIPS.map((chip) => (
+              <span
+                key={chip.label}
+                className={`font-code-sm text-[10px] border px-2.5 py-0.5 uppercase tracking-widest ${chip.color} bg-black/40`}
+              >
+                {chip.label}
+              </span>
+            ))}
+          </div>
+
+          <p className="text-outline font-body-md max-w-2xl">
             CS student &amp; offensive security enthusiast — breaking things legally. CTFs, red team tooling, and IoT research.
           </p>
           <div className="flex flex-wrap gap-3 mt-6">
             <Link
               to="/projects"
-              className="border border-primary-fixed text-primary-fixed px-5 py-2 font-code-sm text-xs uppercase tracking-widest hover:bg-primary-fixed/10 hover:shadow-[0_0_15px_rgba(57,255,20,0.3)] transition-all active:scale-95"
+              className="relative border border-primary-fixed text-primary-fixed px-5 py-2 font-code-sm text-xs uppercase tracking-widest hover:bg-primary-fixed/10 hover:shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:text-white transition-all active:scale-95 group overflow-hidden"
             >
-              [ VIEW_PROJECTS ]
-            </Link>
-            <Link
-              to="/blog"
-              className="border border-outline-variant text-outline-variant px-5 py-2 font-code-sm text-xs uppercase tracking-widest hover:border-secondary-fixed hover:text-secondary-fixed transition-all active:scale-95"
-            >
-              [ READ_LOGS ]
+              <span className="relative z-10">[ VIEW_PROJECTS ]</span>
             </Link>
           </div>
         </div>
 
+        {/* Decorative separator */}
+        <div className="flex items-center gap-3 mb-6 pl-0">
+          <span className="font-code-sm text-[10px] text-outline-variant/60">──</span>
+          <span className="font-code-sm text-[10px] text-outline-variant/50 tracking-widest">LIVE_SESSION // SRC: 0.0.0.0 // DST: OPERATOR_01</span>
+          <div className="h-px flex-1 bg-outline-variant/20" />
+          <span className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse" />
+        </div>
+
         {/* Terminal */}
-        <div className="w-full max-w-3xl terminal-glow bg-black/80 rounded-lg overflow-hidden flex flex-col">
+        <div className="w-full max-w-3xl terminal-glow bg-black/80 rounded-lg overflow-hidden flex flex-col corner-frame">
           {/* Title bar */}
           <div className="terminal-header-bar px-4 py-2 flex items-center justify-between">
             <div className="flex gap-2">
@@ -251,19 +343,10 @@ function HomePage() {
       </section>
 
       {/* ── STATS ROW ── */}
-      <section className="mb-20" id="stats">
+      <section className="mb-20" id="stats" ref={statsRef}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {STATS.map((s) => (
-            <div
-              key={s.label}
-              className="bg-surface-container-lowest border border-outline-variant p-5 flex flex-col items-center justify-center text-center group hover:border-primary-fixed transition-colors"
-            >
-              <span className="font-headline-lg text-primary-fixed group-hover:drop-shadow-[0_0_10px_#39FF14] transition-all">
-                {s.value}
-              </span>
-              <span className="font-code-sm text-secondary-fixed text-xs mt-1">{s.unit}</span>
-              <span className="font-label-caps text-outline text-[9px] mt-2">{s.label}</span>
-            </div>
+            <StatCard key={s.label} stat={s} triggered={statsVisible} />
           ))}
         </div>
       </section>
@@ -282,7 +365,7 @@ function HomePage() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Profile card */}
-          <div className="terminal-glow bg-surface-container-lowest p-6 relative flex flex-col justify-between">
+          <div className="terminal-glow bg-surface-container-lowest p-6 relative flex flex-col justify-between corner-frame">
             <div className="absolute top-0 right-0 p-2 text-[10px] text-outline-variant font-code-sm">
               ID: 6cloudguy
             </div>
@@ -460,5 +543,40 @@ function HomePage() {
         </div>
       </section>
     </SiteLayout>
+  );
+}
+
+// ── StatCard with count-up animation ─────────────────────────────────────
+type StatDef = { label: string; display: string; num: number; unit: string; suffix: string };
+
+function StatCard({ stat, triggered }: { stat: StatDef; triggered: boolean }) {
+  const count = useCountUp(stat.num, 1400, triggered);
+  const displayed = triggered ? `${count}${stat.suffix}` : "0";
+
+  // special-case for "3rd" — show ordinal once done
+  const value = stat.suffix === "" && stat.label === "YEAR_OF_STUDY"
+    ? (triggered && count >= stat.num ? "3rd" : `${count}`)
+    : displayed;
+
+  return (
+    <div className="bg-surface-container-lowest border border-outline-variant p-5 flex flex-col items-center justify-center text-center group hover:border-primary-fixed transition-all duration-300 hover:shadow-[0_0_15px_rgba(57,255,20,0.15)] relative overflow-hidden">
+      {/* Animated corner accent */}
+      <span className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary-fixed/50 group-hover:border-primary-fixed transition-colors" />
+      <span className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary-fixed/50 group-hover:border-primary-fixed transition-colors" />
+
+      <span className="font-headline-lg text-primary-fixed group-hover:drop-shadow-[0_0_12px_#39FF14] transition-all">
+        {value}
+      </span>
+      <span className="font-code-sm text-secondary-fixed text-xs mt-1">{stat.unit}</span>
+      <span className="font-label-caps text-outline text-[9px] mt-2">{stat.label}</span>
+
+      {/* Progress bar */}
+      <div className="w-full mt-3 h-px bg-outline-variant/40 overflow-hidden">
+        <div
+          className="h-full bg-primary-fixed transition-all duration-1000 ease-out"
+          style={{ width: triggered ? "100%" : "0%", transitionDelay: "200ms" }}
+        />
+      </div>
+    </div>
   );
 }
