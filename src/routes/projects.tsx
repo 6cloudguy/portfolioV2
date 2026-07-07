@@ -56,6 +56,20 @@ const PROJECTS: Project[] = [
       "/assets/coding.png",
   },
   {
+    node: "NODE_03 // CHALLENGE",
+    category: "CHALLENGE",
+    accent: "secondary",
+    title: " CELLCODE // HTB CTF CHALLENGE",
+    badge: "[ STATUS: ENDED ]",
+    description:
+      "> CHALLENGED ANYONE WHO DARED AND GAVE THEM EXPERIENCE... HTB CTF challenge [coding] that I created and got published. Based on Conway's Game Of Life and a complex mordern cell automaton",
+    tags: ["HTB","CTF-CHALLENGE","MEDIUM","CODING"],
+    cta: "READ_WRITEUP",
+    link:"https://github.com/hackthebox/university-ctf-2025/tree/main/coding/Cellcode",
+    image:
+      "/assets/coding2.webp",
+  },
+  {
     node: "NODE_04 // SCRIPT",
     category: "SCRIPT",
     accent: "primary",
