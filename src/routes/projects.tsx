@@ -31,6 +31,48 @@ const PROJECTS: Project[] = [
     node: "NODE_01 // SCRIPT",
     category: "SCRIPT",
     accent: "primary",
+    title: "TV STREAMER // SCRIPT",
+    badge: "[ VERSION: V1.1.0 ]",
+    description:
+      "> READY TO INTERUPT AND PLAY ANYHTING... Script to utilise a loophole in Sony Bravia systems to use them as an external sound system/media player. Utilises a default running UPnP DLNA 1.0 service in them. Works on some systems.",
+    tags: ["Python", "Bash", "UPnP", "PoC"],
+    cta: "VIEW_SCRIPT",
+    link:"https://github.com/6cloudguy/tvstreamer",
+    image:
+      "/assets/pcs.png",
+  },
+  {
+    node: "NODE_02 // CHALLENGE",
+    category: "CHALLENGE",
+    accent: "secondary",
+    title: "CHAOGEN // HTB CHALLENGE",
+    badge: "[ STATUS: ACTIVE ]",
+    description:
+      "> READY TO CHALLENGE ANYONE WHO DARES... HTB challenge [coding] that I created and got published. Based on Conway's Game Of Life and a complex mordern cell automaton",
+    tags: ["HTB", "CHALLENGE", "HARD","CODING"],
+    cta: "CHALLENGE_ME",
+    link:"https://app.hackthebox.com/challenges/Chaogen",
+    image:
+      "/assets/coding.png",
+  },
+  {
+    node: "NODE_03 // CHALLENGE",
+    category: "CHALLENGE",
+    accent: "secondary",
+    title: " CELLCODE // HTB CTF CHALLENGE",
+    badge: "[ STATUS: ENDED ]",
+    description:
+      "> CHALLENGED ANYONE WHO DARED AND GAVE THEM EXPERIENCE... HTB CTF challenge [coding] that I created and got published. Based on Conway's Game Of Life and a complex mordern cell automaton",
+    tags: ["HTB","CTF-CHALLENGE","MEDIUM","CODING"],
+    cta: "READ_WRITEUP",
+    link:"https://github.com/hackthebox/university-ctf-2025/tree/main/coding/Cellcode",
+    image:
+      "/assets/coding2.webp",
+  },
+  {
+    node: "NODE_04 // SCRIPT",
+    category: "SCRIPT",
+    accent: "primary",
     title: "AUTOFN // SCRIPT",
     badge: "[ FOCUS: RECON ]",
     description:
@@ -42,11 +84,11 @@ const PROJECTS: Project[] = [
       "/assets/autofn.png",
   },
   {
-    node: "NODE_02 // HARDWARE",
+    node: "NODE_05 // HARDWARE",
     category: "HARDWARE",
-    accent: "secondary",
+    accent: "primary",
     title: "RADAR SYSTEM // INTERNSHIP PROJECT",
-    badge: "[ STATUS: PROTOTYPE ]",
+    badge: "[ PROTOTYPE ]",
     description:
       "> READY FOR DETECTION AND TRACKING... Custom Aruduino UNO system for real-time object detection using ultrasonic sensor and servo motor. Features capture, tracking and alerting of objects on-the-run.",
     tags: ["C++", "Arduino-UNO", "Python", "Pygame"],
@@ -54,34 +96,6 @@ const PROJECTS: Project[] = [
     link:"https://github.com/6cloudguy/radariot",
     image:
       "/assets/IOT.png",
-  },
-  {
-    node: "NODE_03 // CHALLENGE",
-    category: "CHALLENGE",
-    accent: "secondary",
-    title: "CHAOGEN // HTB CHALLENGE",
-    badge: "[ STATUS: ACTIVE ]",
-    description:
-      "> READY TO CHALLENGE ANYONE WHO DARES... HTB challenge [coding] that I created and got published. Based on Conway's Game Of Life and a complex mordern cell automaton",
-    tags: ["HTB", "CHALLENGE", "HARD","CODING"],
-    cta: "CHALLENGE_ME",
-    link:"http://app.hackthebox.com/challenges/Chaogen",
-    image:
-      "/assets/coding.png",
-  },
-  {
-    node: "NODE_04 // SCRIPT",
-    category: "SCRIPT",
-    accent: "primary",
-    title: "TV STREAMER // SCRIPT",
-    badge: "[ STATUS: IN_PROGRESS ]",
-    description:
-      "> READY TO INTERUPT AND PLAY ANYHTING... Script to utilise a loophole in Sony Bravia systems to use them as an external sound system/media player. Utilises a default running UPnP DLNA 1.0 service in them. Works on some systems.",
-    tags: ["Python", "Bash", "UPnP", "PoC"],
-    cta: "VIEW_SCRIPT",
-    link:"https://github.com/6cloudguy/tvstreamer",
-    image:
-      "/assets/pcs.png",
   },
 ];
 
@@ -189,22 +203,6 @@ function ProjectsPage() {
         <StatusBar label="NET_TRAFFIC" value="1.2 Gbps" color="secondary" width="w-2/3" />
         <StatusBar label="ACTIVE_THREADS" value="12/16" color="tertiary" width="w-4/5" />
       </div> */}
-
-      {/* Terminal listing */}
-      <div className="border border-outline-variant bg-black p-6 font-code-sm text-primary-fixed mb-4 max-w-2xl">
-        <div className="mb-2">root@parrot:~/projects$ ls -la</div>
-        <div className="opacity-80 flex flex-col gap-1">
-          <div>drwxr-xr-x  2 root root  4096 Jul 24 14:32 .</div>
-          <div>drwxr-xr-x 15 root root  4096 Jul 20 09:15 ..</div>
-          <div>-rw-r--r--  1 root root  2048 Jul 22 18:00 autofn.sh</div>
-          <div>-rw-r--r--  1 root root  1024 Nov 21 11:24 tv-speaker.sh</div>
-          <div>-rw-r--r--  1 root root 10240 Sep 21 01:45 radar.py</div>
-        </div>
-        <div className="mt-4">
-          root@parrot:~/projects${" "}
-          <span className="inline-block w-2 h-4 bg-primary-fixed align-middle animate-pulse" />
-        </div>
-      </div>
     </SiteLayout>
   );
 }
