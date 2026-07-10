@@ -14,9 +14,7 @@ export const Route = createFileRoute("/projects")({
 });
 
 type Project = {
-  node: string;
   category: string;
-  accent: "primary" | "secondary";
   title: string;
   badge: string;
   description: string;
@@ -28,9 +26,7 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
-    node: "NODE_01 // SCRIPT",
     category: "SCRIPT",
-    accent: "primary",
     title: "TV STREAMER // SCRIPT",
     badge: "[ VERSION: V1.1.0 ]",
     description:
@@ -42,9 +38,19 @@ const PROJECTS: Project[] = [
       "/assets/pcs.png",
   },
   {
-    node: "NODE_02 // CHALLENGE",
+    category: "HOMELAB",
+    title: "SERVERIA // HOMELAB PROJECT",
+    badge: "[ STATUS: ACTIVE ]",
+    description:
+      "> BUILT ON OLD BUT WORKS AS NEW... My home lab that i created to learn and experiment with networking, linux, security and privacy. It is a self-hosted on my old laptop with multiple services running on it.",
+    tags: ["HOMELAB", "LINUX", "PI-HOLE","NETWORKING"],
+    cta: "READ_DOCUMENTATION",
+    link:"https://6cloudguy.github.io/posts/homelab/",
+    image:
+      "/assets/server.png",
+  },
+  {
     category: "CHALLENGE",
-    accent: "secondary",
     title: "CHAOGEN // HTB CHALLENGE",
     badge: "[ STATUS: ACTIVE ]",
     description:
@@ -56,9 +62,7 @@ const PROJECTS: Project[] = [
       "/assets/coding.png",
   },
   {
-    node: "NODE_03 // CHALLENGE",
     category: "CHALLENGE",
-    accent: "secondary",
     title: " CELLCODE // HTB CTF CHALLENGE",
     badge: "[ STATUS: ENDED ]",
     description:
@@ -70,9 +74,7 @@ const PROJECTS: Project[] = [
       "/assets/coding2.webp",
   },
   {
-    node: "NODE_04 // SCRIPT",
     category: "SCRIPT",
-    accent: "primary",
     title: "AUTOFN // SCRIPT",
     badge: "[ FOCUS: RECON ]",
     description:
@@ -84,9 +86,7 @@ const PROJECTS: Project[] = [
       "/assets/autofn.png",
   },
   {
-    node: "NODE_05 // HARDWARE",
     category: "HARDWARE",
-    accent: "primary",
     title: "RADAR SYSTEM // INTERNSHIP PROJECT",
     badge: "[ PROTOTYPE ]",
     description:
@@ -118,9 +118,10 @@ function ProjectsPage() {
       </section>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        {PROJECTS.map((p) => {
+        {PROJECTS.map((p, index) => {
+          const isPrimary = index % 4 === 0 || index % 4 === 3;
           const accent =
-            p.accent === "primary"
+            isPrimary
               ? {
                   ring: "hover:border-primary-fixed-dim",
                   text: "text-primary-fixed",
@@ -147,7 +148,9 @@ function ProjectsPage() {
               className={`group relative bg-surface-container-lowest border border-outline-variant overflow-hidden transition-all ${accent.ring}`}
             >
               <div className="bg-surface-container-highest px-4 py-2 flex justify-between items-center border-b border-outline-variant">
-                <span className={`font-label-caps ${accent.nodeText}`}>{p.node}</span>
+                <span className={`font-label-caps ${accent.nodeText}`}>
+                  NODE_{String(index + 1).padStart(2, "0")} // {p.category}
+                </span>
                 <div className="flex gap-2">
                   <span className="material-symbols-outlined text-outline text-sm">remove</span>
                   <span className="material-symbols-outlined text-outline text-sm">close</span>

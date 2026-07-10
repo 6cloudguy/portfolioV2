@@ -46,15 +46,15 @@ type Cert = {
   issuer: string;
   year: string;
   status: "COMPLETED" | "IN_PROGRESS" | "EXPIRED";
-  type: "Certification" | "Completion" | "Professional" | "Course";
+  type: "Certification" | "Professional" | "Course";
   badge: string;
   image?: string;
 };
 
 function accentForType(type: Cert["type"]) {
   if (type === "Professional") return { text: "text-primary-fixed", border: "border-primary-fixed", bg: "bg-primary-fixed/10", glow: "hover:shadow-[0_0_20px_rgba(57,255,20,0.3)]", badge: "bg-primary-fixed text-black" };
-  if (type === "Certification") return { text: "text-secondary-fixed", border: "border-secondary-fixed", bg: "bg-secondary-fixed/10", glow: "hover:shadow-[0_0_20px_rgba(111,246,255,0.3)]", badge: "bg-secondary-fixed text-black" };
-  return { text: "text-tertiary-fixed-dim", border: "border-tertiary-fixed-dim", bg: "bg-tertiary-fixed-dim/10", glow: "hover:shadow-[0_0_20px_rgba(255,179,178,0.3)]", badge: "bg-tertiary-fixed-dim text-black" };
+  if (type === "Certification") return { text: "text-tertiary-fixed-dim", border: "border-tertiary-fixed-dim", bg: "bg-tertiary-fixed-dim/10", glow: "hover:shadow-[0_0_20px_rgba(255,179,178,0.3)]", badge: "bg-tertiary-fixed-dim text-black" };
+  return { text: "text-secondary-fixed", border: "border-secondary-fixed", bg: "bg-secondary-fixed/10", glow: "hover:shadow-[0_0_20px_rgba(111,246,255,0.3)]", badge: "bg-secondary-fixed text-black" };
 }
 
 const CERTIFICATIONS: Cert[] = [
@@ -194,7 +194,7 @@ const completedCertCount = CERTIFICATIONS.filter((cert) => cert.status === "COMP
 const STATS = [
   { label: "YEAR_OF_STUDY", display: "3rd", num: 3,  unit: "YEAR",   suffix: "" },
   { label: "CERTS_EARNED",  display: `${completedCertCount}`,   num: completedCertCount,  unit: "CERT",   suffix: "" },
-  { label: "CTF_PLATFORMS", display: "2+",  num: 2,  unit: "ACTIVE", suffix: "+" },
+  { label: "PLATFORMS", display: "2+",  num: 2,  unit: "ACTIVE", suffix: "+" },
   { label: "BOXES_PWNED",   display: "30+", num: 30, unit: "BOXES",  suffix: "+" },
 ];
 
@@ -335,8 +335,8 @@ function HomePage() {
             <div>
               <p className="text-on-surface mb-6 leading-relaxed font-body-md text-sm">
                 3rd year CS student obsessed with breaking things — the legal way. I got into
-                security through CTFs and haven't looked back since. Currently building up my
-                pentesting fundamentals, working toward my eJPT, and tinkered with IoT hardware
+                security through HTB and haven't looked back since. Currently building up my
+                pentesting fundamentals, working toward my eJPT, and tinkered with IoT
                 on the side.
                 <br /><br />
                 When I'm not studying or hacking boxes on HackTheBox, I'm working on
@@ -477,6 +477,11 @@ function HomePage() {
                       className="w-full h-full object-cover scale-105"
                     />
                     <div className="absolute inset-0 bg-black/70" />
+                    {/* Badge — top-left corner of overlay */}
+                    <div className={`absolute top-4 left-4 ${accent.badge} font-headline-md w-14 h-14 flex items-center justify-center font-bold text-sm tracking-tighter`}>
+                      {cert.badge}
+                    </div>
+                    {/* Centered CTA */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className={`font-code-sm text-[11px] uppercase tracking-widest ${accent.text} border ${accent.border} px-3 py-1.5 bg-black/60`}>
                         [ VIEW CERT ]
@@ -491,7 +496,7 @@ function HomePage() {
                 </span>
 
                 {/* Card content (fades out on hover) */}
-                <div className="flex flex-col gap-4 transition-opacity duration-300 group-hover:opacity-0">
+                <div className={`flex flex-col gap-4 transition-opacity duration-300 ${cert.image ? "group-hover:opacity-0" : ""}`}>
                   {/* Badge */}
                   <div className="flex items-start gap-4">
                     <div className={`${accent.badge} font-headline-md w-16 h-16 flex items-center justify-center shrink-0 font-bold text-sm tracking-tighter`}>
