@@ -45,7 +45,7 @@ type Cert = {
   name: string;
   issuer: string;
   year: string;
-  status: "COMPLETED" | "IN_PROGRESS" | "EXPIRED";
+  status: "COMPLETED" | "IN_PROGRESS" | "EXPIRED" | "ACTIVE";
   type: "Certification" | "Professional" | "Course";
   badge: string;
   image?: string;
@@ -63,16 +63,17 @@ const CERTIFICATIONS: Cert[] = [
     name: "eLearnSecurity Junior Penetration Tester",
     issuer: "INE Security",
     year: "2026",
-    status: "IN_PROGRESS",
+    status: "ACTIVE",
     type: "Professional",
     badge: "eJPT",
+    image: "/certs/ejpt.png",
   },
   {
     id: "CERT_02",
     name: "INE Certified Cloud Associate",
     issuer: "INE Security",
     year: "2025",
-    status: "COMPLETED",
+    status: "ACTIVE",
     type: "Professional",
     badge: "ICCA",
     image: "/certs/ICCA.png",
@@ -82,7 +83,7 @@ const CERTIFICATIONS: Cert[] = [
     name: "Google Cybersecurity",
     issuer: "Google",
     year: "2024",
-    status: "COMPLETED",
+    status: "ACTIVE",
     type: "Professional",
     badge: "GCYB",
     image: "/certs/gcyb.png",
@@ -189,11 +190,11 @@ const CERTIFICATIONS: Cert[] = [
   },
 ];
 
-const completedCertCount = CERTIFICATIONS.filter((cert) => cert.status === "COMPLETED").length;
+const completedCertCount = CERTIFICATIONS.filter((cert) => cert.status === "COMPLETED" || cert.status === "ACTIVE" ).length;
 
 const STATS = [
   { label: "YEAR_OF_STUDY", display: "3rd", num: 3,  unit: "YEAR",   suffix: "" },
-  { label: "CERTS_EARNED",  display: `${completedCertCount}`,   num: completedCertCount,  unit: "CERT",   suffix: "" },
+  { label: "CERTS_EARNED",  display: `${completedCertCount}`,   num: completedCertCount,  unit: "CERTS",   suffix: "" },
   { label: "PLATFORMS", display: "2+",  num: 2,  unit: "ACTIVE", suffix: "+" },
   { label: "BOXES_PWNED",   display: "30+", num: 30, unit: "BOXES",  suffix: "+" },
 ];
@@ -361,11 +362,11 @@ function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <button className="border border-primary-fixed text-primary-fixed px-4 py-2 font-code-sm text-[10px] uppercase tracking-widest hover:shadow-[0_0_15px_#39FF14] hover:bg-primary-fixed/10 transition-all active:scale-95 animate-flicker glitch-text">
                 [ EXECUTE: GET_CV.PDF ]
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* Image */}
@@ -443,11 +444,11 @@ function HomePage() {
       <section className="mb-20 scroll-mt-24" id="certs">
         <div className="mb-8 border-l-4 border-tertiary-fixed-dim pl-6">
           <div className="flex items-center gap-4 mb-1">
-            <span className="text-tertiary-fixed-dim font-code-sm">CLEARANCE REQUIRED</span>
+            <span className="text-tertiary-fixed-dim font-code-sm">CREDENTIALS</span>
             <div className="h-px flex-1 bg-outline-variant" />
           </div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-on-surface uppercase tracking-tighter">
-            CREDENTIALS
+            CERTIFICATIONS
           </h2>
         </div>
 
@@ -456,7 +457,7 @@ function HomePage() {
             const accent = accentForType(cert.type);
 
             const statusColor =
-              cert.status === "COMPLETED"
+              cert.status === "COMPLETED" || cert.status === "ACTIVE"
                 ? "text-primary-fixed"
                 : cert.status === "IN_PROGRESS"
                 ? "text-secondary-fixed animate-pulse"
@@ -520,7 +521,7 @@ function HomePage() {
                   <div className="flex items-center justify-between font-code-sm text-[11px]">
                     <span className="text-outline">{cert.status === "IN_PROGRESS" ? "TARGET: " : "ISSUED: "}{cert.year}</span>
                     <span className={`${statusColor} font-label-caps`}>
-                      {cert.status === "COMPLETED" && "● "}
+                      {(cert.status === "COMPLETED" || cert.status === "ACTIVE") && "● "}
                       {cert.status === "IN_PROGRESS" && "◌ "}
                       {cert.status === "EXPIRED" && "✕ "}
                       {cert.status}
